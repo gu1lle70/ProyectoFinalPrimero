@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
     public GameObject player;
-    public float offset;
-    public float offsetSmoothing;
+    public float offset = 2;
+    public float offsetSmoothing = 5;
     private Vector3 playerPosition;
     public bool der;
     public bool izq;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         der = true;

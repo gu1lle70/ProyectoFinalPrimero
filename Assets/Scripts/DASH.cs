@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DASH : MonoBehaviour
 {
-    private bool canDash = true;
+    [SerializeField]private bool canDash = true;
     private bool isDashing;
-    private float dashingPower = 24f;
+    [SerializeField]private float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
@@ -23,6 +23,11 @@ public class DASH : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
+        if(PlayerMove.Instance._isGrounded == true)
+        {
+            canDash = true;
+        }
     }
 
     private IEnumerator Dash()
@@ -31,13 +36,21 @@ public class DASH : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+
+        if(CameraController.Instance.der == true)
+        {
+            rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        }
+        else if (CameraController.Instance.izq == true)
+        {
+            rb.velocity -= new Vector2(transform.localScale.y * dashingPower, 0f);
+        }
+        
         
         yield return new WaitForSeconds(dashingTime);
        
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
     }
 }
