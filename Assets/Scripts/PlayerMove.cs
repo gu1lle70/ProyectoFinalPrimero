@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private bool _wallJumped;
     [SerializeField] private bool _wallSlide;
     [SerializeField] private bool _isDashing;
-    [SerializeField] private bool _isGrounded;
+    [SerializeField] public bool _isGrounded;
     [SerializeField] private bool _hasDashed;
     [Space]
 
