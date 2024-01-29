@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DASH : MonoBehaviour
 {
@@ -19,18 +20,21 @@ public class DASH : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.R) && canDash)
+        if (PlayerMove.Instance._isGrounded == true)
+        {
+            canDash = true;
+        }
+
+    }
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if (context.performed && canDash)
         {
             StartCoroutine(Dash());
         }
 
-        if(PlayerMove.Instance._isGrounded == true)
-        {
-            canDash = true;
-        }
-    }
-
-    private IEnumerator Dash()
+    }           
+private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;

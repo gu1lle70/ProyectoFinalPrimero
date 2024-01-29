@@ -183,6 +183,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5186773206195845913, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
+      value: 47ca1d69-bb32-4baf-b599-ce9e67029f93
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
+      value: Player/Dash[/Keyboard/r]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 544785663}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DASH, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
