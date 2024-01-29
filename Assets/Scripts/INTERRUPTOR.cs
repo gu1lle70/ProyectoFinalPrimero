@@ -5,14 +5,12 @@ using UnityEngine;
 public class INTERRUPTOR : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.transform.name == "Player")
+        {
+            collision.transform.parent = transform;
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
     }
 }
