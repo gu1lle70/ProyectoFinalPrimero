@@ -5,8 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    public float offset;
-    public float offsetSmoothing;
+    public float offset = 2;
+    public float offsetSmoothing = 5;
     private Vector3 playerPosition;
     public bool der;
     public bool izq;
