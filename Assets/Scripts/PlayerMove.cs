@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static PlayerMove Instance;
+
     public Rigidbody2D rb;
 
     [Header("Grounded")]
@@ -35,9 +37,14 @@ public class PlayerMove : MonoBehaviour
 
     public int side = 1;
     [Header("Inputs")]
-    [SerializeField] private float _horizontal;
-    [SerializeField] private float _vertical;
-    [SerializeField] private Vector2 _dir;
+    [SerializeField] public float _horizontal = 1f;
+    [SerializeField] public float _vertical;
+    [SerializeField] public Vector2 _dir;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -55,15 +62,17 @@ public class PlayerMove : MonoBehaviour
         {
             _isGrounded = false;
         }
-        _dir = new Vector2(_horizontal, _vertical);
+        
         rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(_horizontal * _speed, rb.velocity.y)), _wallJumpLerp * Time.deltaTime);
     }
 
 
     public void Move(InputAction.CallbackContext context)
     {
+
         _horizontal = context.ReadValue<Vector2>().x;
         _vertical = context.ReadValue<Vector2>().y;
+        _dir = new Vector2(_horizontal, _vertical);
     }
     public void Jump(InputAction.CallbackContext context)
     {
