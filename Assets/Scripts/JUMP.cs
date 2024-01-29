@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class JUMP : MonoBehaviour
 {
-    [SerializeField] float jumpForce = 10;
+    [SerializeField] private float _jumpForce = 50;
 
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
-    private void Start()
+    public void Jump(InputAction.CallbackContext context)
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (context.performed && PlayerMove.Instance._isGrounded)
         {
-            rb.AddForce(Vector2.up * jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
         }
     }
+
 }

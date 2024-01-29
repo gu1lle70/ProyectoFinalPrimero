@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
     [Space]
     [Header("Stats")]
     [SerializeField] private float _speed = 10;
-    [SerializeField] private float _jumpForce = 50;
     [SerializeField] private float _slideSpeed = 5;
     [SerializeField] private float _wallJumpLerp = 10;
     [SerializeField] private float _dashSpeed = 20;
@@ -74,13 +73,7 @@ public class PlayerMove : MonoBehaviour
         _vertical = context.ReadValue<Vector2>().y;
         _dir = new Vector2(_horizontal, _vertical);
     }
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if (context.performed && _isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
-        }
-    }
+   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

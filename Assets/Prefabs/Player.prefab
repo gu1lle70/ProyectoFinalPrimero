@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 278099329763708595}
   - component: {fileID: 554014223235129494}
   - component: {fileID: 601985038963827134}
+  - component: {fileID: 1891437792094790108}
+  - component: {fileID: 2890213497980766603}
   - component: {fileID: 6235662776289928425}
   - component: {fileID: 5186773206195845913}
   - component: {fileID: 8689494929702283510}
@@ -35,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 8019636067156642487}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &554014223235129494
 SpriteRenderer:
@@ -107,7 +109,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _speed: 10
-  _jumpForce: 4
   _slideSpeed: 5
   _wallJumpLerp: 10
   _dashSpeed: 20
@@ -124,6 +125,35 @@ MonoBehaviour:
   _horizontal: 0
   _vertical: 0
   _dir: {x: 0, y: 0}
+--- !u!114 &1891437792094790108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffca1067bb40a5f489f04c8139cf7c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDash: 1
+  dashingPower: 40
+  rb: {fileID: 5186773206195845913}
+--- !u!114 &2890213497980766603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e21f1d7612f4d47abe2f8e90297722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpForce: 50
+  rb: {fileID: 0}
 --- !u!114 &6235662776289928425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +259,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3ce63952-2d31-4c91-bf38-84a83ffb997e
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 47ca1d69-bb32-4baf-b599-ce9e67029f93
+    m_ActionName: Player/Dash[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
