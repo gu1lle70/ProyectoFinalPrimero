@@ -26,7 +26,7 @@ public class PhysicsManager : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(_groundPos.position, _radius, groundedLayer);
         IsGrounded = hit != null;
-        Debug.Log("Hit: " + hit);
+        //Debug.Log("Hit: " + hit);
     }
 
 
