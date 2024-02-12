@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c149045b7313324382faf0d7fa06bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGrounded: 0
   groundedLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -193,8 +194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 50
-  _jumpMultiplier: 3
-  rb: {fileID: 0}
+  _jumpForceAug: 16
+  _jumpBufferTime: 0.2
+  _jumpBufferCounter: 0
+  _isJumping: 0
+  _jumpCooldown: 0.4
 --- !u!114 &6235662776289928425
 MonoBehaviour:
   m_ObjectHideFlags: 0
