@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 601985038963827134}
   - component: {fileID: 1891437792094790108}
   - component: {fileID: 2890213497980766603}
+  - component: {fileID: 8800880002847733116}
   - component: {fileID: 6235662776289928425}
   - component: {fileID: 5186773206195845913}
   - component: {fileID: 8689494929702283510}
@@ -194,11 +195,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 50
+<<<<<<< HEAD
   _jumpForceAug: 16
+=======
+  _jumpMultiplier: 3
+>>>>>>> f693804257e00be20da8cb3f942abf569f06d071
   _jumpBufferTime: 0.2
   _jumpBufferCounter: 0
   _isJumping: 0
   _jumpCooldown: 0.4
+<<<<<<< HEAD
+=======
+  rb: {fileID: 0}
+--- !u!114 &8800880002847733116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7b9944086256947b5a4abaa6ff7952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 0.72
+  jump_force: 5
+  wall_mask:
+    serializedVersion: 2
+    m_Bits: 128
+>>>>>>> f693804257e00be20da8cb3f942abf569f06d071
 --- !u!114 &6235662776289928425
 MonoBehaviour:
   m_ObjectHideFlags: 0
