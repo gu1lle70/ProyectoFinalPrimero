@@ -23,9 +23,29 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
+    public void EnableObject(GameObject ob)
+    {
+        if (ob == null)
+            return;
+
+        ob.SetActive(true);
+    }
+    public void DisableObject(GameObject ob)
+    {
+        if (ob == null)
+            return;
+
+        ob.SetActive(false);
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void MaximizeWindow(bool value)
+    {
+        Screen.fullScreen = value;
     }
 }
