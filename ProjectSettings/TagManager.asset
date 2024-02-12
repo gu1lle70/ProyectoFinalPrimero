@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bullet
+<<<<<<< HEAD
   - Interruptor
+=======
+  - Wall
+>>>>>>> 39adb86de41c22321796303a9c77c45518eb4166
   layers:
   - Default
   - TransparentFX
@@ -14,7 +18,11 @@ TagManager:
   - Water
   - UI
   - Player
+<<<<<<< HEAD
   - Interruptor
+=======
+  - Wall
+>>>>>>> 39adb86de41c22321796303a9c77c45518eb4166
   - 
   - 
   - 
