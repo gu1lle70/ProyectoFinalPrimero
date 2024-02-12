@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public static CameraController Instance;
+    public static CameraController Instance { get; private set; }
+
+
     public GameObject player;
     public float offset = 2;
     public float offsetSmoothing = 5;
@@ -15,7 +17,10 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
     }
     void Start()
     {

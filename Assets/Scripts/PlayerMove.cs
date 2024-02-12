@@ -5,16 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    public static PlayerMove Instance;
+    public static PlayerMove Instance { get; private set; }
 
     public Rigidbody2D rb;
 
-    [Header("Grounded")]
-    [SerializeField] private Transform _groundCheckCollider;
-    private const float _checkRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
-
-    [Space]
     [Header("Stats")]
     [SerializeField] private float _speed = 10;
     [SerializeField] private float _slideSpeed = 5;
@@ -22,7 +16,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _dashSpeed = 20;
     [SerializeField] private float _fallMultiplier = 2.5f;
     [SerializeField] private float _lowJumpMultiplier = 2f;
-
     [Space]
     [Header("Booleans")]
     [SerializeField] private bool _canMove;
@@ -30,39 +23,28 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private bool _wallJumped;
     [SerializeField] private bool _wallSlide;
     [SerializeField] private bool _isDashing;
-    [SerializeField] public bool _isGrounded;
     [SerializeField] private bool _hasDashed;
     [Space]
-
-    public int side = 1;
     [Header("Inputs")]
     [SerializeField] public float _horizontal = 1f;
     [SerializeField] public float _vertical;
     [SerializeField] public Vector2 _dir;
 
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
     }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(_groundCheckCollider.position, _checkRadius, groundLayer);
-
-        if (colliders.Length > 0)   
-        {
-            _isGrounded = true;
-        }
-        else
-        {
-            _isGrounded = false;
-        }
-        
-        rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(_horizontal * _speed, rb.velocity.y)), _wallJumpLerp * Time.deltaTime);
+         rb.velocity = new Vector2(_horizontal * _speed, rb.velocity.y);
     }
 
 
@@ -74,9 +56,5 @@ public class PlayerMove : MonoBehaviour
         _dir = new Vector2(_horizontal, _vertical);
     }
    
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_groundCheckCollider.position, _checkRadius);
-    }
+  
 }

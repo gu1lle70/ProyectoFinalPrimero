@@ -21,7 +21,7 @@ public class DASH : MonoBehaviour
         {
             return;
         }
-        if (PlayerMove.Instance._isGrounded == true)
+        if (PhysicsManager.Instance.IsGrounded)
         {
             canDash = true;
         }

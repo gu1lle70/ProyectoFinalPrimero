@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 278099329763708595}
   - component: {fileID: 554014223235129494}
+  - component: {fileID: 2632911346891654046}
+  - component: {fileID: 5282859119827872801}
+  - component: {fileID: 4295586221172303243}
   - component: {fileID: 601985038963827134}
   - component: {fileID: 1891437792094790108}
   - component: {fileID: 2890213497980766603}
@@ -35,7 +38,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8019636067156642487}
+  - {fileID: 372147978485299768}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -91,6 +94,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2632911346891654046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c149045b7313324382faf0d7fa06bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundedLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _groundPos: {fileID: 372147978485299768}
+  _radius: 0.2
+--- !u!114 &5282859119827872801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53db3460510b7249881df8d35290c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+--- !u!114 &4295586221172303243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418cf6d044775e04bafa5436c9d192c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 6792556540962466712, guid: b4720e402125a6a458e7802e9c934b2b, type: 3}
 --- !u!114 &601985038963827134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,10 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5186773206195845913}
-  _groundCheckCollider: {fileID: 8019636067156642487}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
   _speed: 10
   _slideSpeed: 5
   _wallJumpLerp: 10
@@ -119,9 +161,7 @@ MonoBehaviour:
   _wallJumped: 0
   _wallSlide: 0
   _isDashing: 0
-  _isGrounded: 0
   _hasDashed: 0
-  side: 1
   _horizontal: 0
   _vertical: 0
   _dir: {x: 0, y: 0}
@@ -153,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 50
+  _jumpMultiplier: 3
   rb: {fileID: 0}
 --- !u!114 &6235662776289928425
 MonoBehaviour:
@@ -263,6 +304,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 47ca1d69-bb32-4baf-b599-ce9e67029f93
     m_ActionName: Player/Dash[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eeac7a49-26eb-4170-9812-b5c0dd0b572c
+    m_ActionName: Player/Shoot[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -304,7 +349,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2086632009008903650}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d84fe443c76344e47bf2608968209080, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -330,7 +375,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!1 &4658022106148453081
+--- !u!1 &2754956411538872017
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,23 +383,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8019636067156642487}
-  m_Layer: 0
-  m_Name: GroundDetector
+  - component: {fileID: 372147978485299768}
+  m_Layer: 6
+  m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8019636067156642487
+--- !u!4 &372147978485299768
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4658022106148453081}
+  m_GameObject: {fileID: 2754956411538872017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.802, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
