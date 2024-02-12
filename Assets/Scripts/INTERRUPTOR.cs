@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class INTERRUPTOR : MonoBehaviour
 {
+
+    /*
+    [SerializeField]
+    private PlatformMovement platform;
     // Start is called before the first frame update
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.name == "Player")
+        if (collision.CompareTag("Interruptor"))
         {
-            collision.transform.parent = transform;
-            GetComponent<SpriteRenderer>().color = Color.red;
+            PlatformMovement platformMovement = platform.GetComponent<PlatformMovement>();
+
+            if (platformMovement != null)
+            {
+                // Activar el movimiento de la plataforma
+                platformMovement.ActivatePlatform();
+            }      
         }
     }
+    */
 }
