@@ -57,11 +57,11 @@ private IEnumerator Dash()
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
 
-        if(CameraController.Instance.der == true)
+        if(PlayerSprites.Instance.spriteRenderer.flipX == false)
         {
             rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         }
-        else if (CameraController.Instance.izq == true)
+        else
         {
             rb.velocity -= new Vector2(transform.localScale.y * dashingPower, 0f);
         }

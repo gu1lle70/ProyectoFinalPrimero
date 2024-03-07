@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _dashSpeed = 20;
     [SerializeField] private float _fallMultiplier = 2.5f;
     [SerializeField] private float _lowJumpMultiplier = 2f;
+    [SerializeField] private float _slow_multiplier; // Este se usa --- !! ---
     [Space]
     [Header("Booleans")]
     [SerializeField] private bool _canMove;
@@ -29,6 +30,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] public float _horizontal = 1f;
     [SerializeField] public float _vertical;
     [SerializeField] public Vector2 _dir;
+
+    private bool player_static = true;
 
 
     private void Awake()
@@ -54,7 +57,7 @@ public class PlayerMove : MonoBehaviour
             }
             if (rb.velocity.magnitude > 0 && _dir.x == 0 && PhysicsManager.Instance.IsGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x * 0.95f, rb.velocity.y);
+                rb.velocity = new Vector2(rb.velocity.x * _slow_multiplier, rb.velocity.y);
             }
         }
     }
@@ -62,11 +65,10 @@ public class PlayerMove : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        player_static = false;
 
         _horizontal = context.ReadValue<Vector2>().x;
         _vertical = context.ReadValue<Vector2>().y;
         _dir = new Vector2(_horizontal, _vertical);
     }
-   
-  
 }

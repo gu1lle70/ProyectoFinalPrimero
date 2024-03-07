@@ -10,6 +10,9 @@ public class PlayerSprites : MonoBehaviour
 
     [HideInInspector] public SpriteRenderer spriteRenderer;
 
+    private Rigidbody2D rb;
+    private Animator anim;
+
     private void Awake()
     {
         if (Instance == null)
@@ -18,17 +21,23 @@ public class PlayerSprites : MonoBehaviour
             Destroy(this);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
-    public void SetSpriteDirection(InputAction.CallbackContext con)
+    private void FixedUpdate()
     {
-        if (con.ReadValue<Vector2>().x > 0)
-        {
+        float vel = rb.velocity.x;
+
+        if (vel > 0)
             spriteRenderer.flipX = false;
-        }
-        else if (con.ReadValue<Vector2>().x < 0)
+        else if (vel < 0)
         {
+            vel *= -1;
             spriteRenderer.flipX = true;
         }
+
+        anim.SetFloat("x_velocity", vel);
+        anim.SetFloat("y_velocity", rb.velocity.y);
     }
 }

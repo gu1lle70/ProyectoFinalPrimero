@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 2086632009008903650}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.68, y: -0.41, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 372147978485299768}
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 76510a7ba662b2a4b9af7e43536c195f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -161,6 +161,7 @@ MonoBehaviour:
   _dashSpeed: 20
   _fallMultiplier: 2.5
   _lowJumpMultiplier: 2
+  _slow_multiplier: 0.8
   _canMove: 0
   _wallGrab: 0
   _wallJumped: 0
@@ -183,7 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDash: 1
-  dashingPower: 40
+  isDashing: 0
+  dashingPower: 5
+  dash_num: 1
   rb: {fileID: 5186773206195845913}
 --- !u!114 &2890213497980766603
 MonoBehaviour:
@@ -215,7 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7b9944086256947b5a4abaa6ff7952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 0.72
+  onWallJump: 0
+  range: 0.68
   jump_force: 5
   wall_mask:
     serializedVersion: 2
@@ -385,6 +389,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: db1e21e3-737a-44fb-ab6b-006d2fc62ea5
     m_ActionName: UI/Back[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 601985038963827134}
+        m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
+        m_MethodName: PlayerStatic
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 11673395-07d1-4892-bf90-500e5214a7d6
+    m_ActionName: Player/Idle[/Keyboard/anyKey]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -461,8 +481,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.03}
+  m_Size: {x: 0.15, y: 0.3}
   m_Direction: 0
 --- !u!95 &6495303741121787173
 Animator:
@@ -474,7 +494,7 @@ Animator:
   m_GameObject: {fileID: 2086632009008903650}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2c7a66fa199ec9e43b09ac74ce053db5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0c1bb7cfe4e3edd4493ec9647f33102e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -517,8 +537,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.03}
+  m_Size: {x: 0.15, y: 0.3}
   m_Direction: 0
 --- !u!1 &2754956411538872017
 GameObject:

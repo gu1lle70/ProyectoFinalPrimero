@@ -11,7 +11,7 @@ public class PlayerCollisions : MonoBehaviour
         if (coll.tag == "Spikes")
         {
             Debug.Log("Muerte");
-            //SceneManager.LoadScene("Menu"); // Muerte, cambiar a restar vidas etc. aquí según hagamos
+            //SceneManager.LoadScene("Menu"); // cambiar a restar vidas etc. aquí según hagamos
         }
         else if (coll.tag == "Dash orb")
         {
