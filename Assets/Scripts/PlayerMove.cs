@@ -44,7 +44,19 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-         rb.velocity = new Vector2(_horizontal * _speed, rb.velocity.y);
+        if (!DASH.instance.isDashing)
+        {
+            rb.velocity = new Vector2((_horizontal * _speed * (Time.deltaTime + 1)) + rb.velocity.x, rb.velocity.y);
+
+            if (rb.velocity.magnitude > _speed)
+            {
+                rb.velocity = new Vector2(_horizontal * _speed, rb.velocity.y);
+            }
+            if (rb.velocity.magnitude > 0 && _dir.x == 0 && PhysicsManager.Instance.IsGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x * 0.95f, rb.velocity.y);
+            }
+        }
     }
 
 

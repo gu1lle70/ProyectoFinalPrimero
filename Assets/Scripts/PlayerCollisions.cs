@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(BoxCollider))]
 public class PlayerCollisions : MonoBehaviour
 {
-    private void Start()
-    {
-        GetComponent<BoxCollider2D>().isTrigger = true;
-    }
+    // Tiene que haber un collider en trigger para que funcione
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag == "Pinchos")
+        if (coll.tag == "Spikes")
         {
-            SceneManager.LoadScene("Menu"); // Muerte, cambiar a restar vidas etc. aquí según hagamos
+            Debug.Log("Muerte");
+            //SceneManager.LoadScene("Menu"); // Muerte, cambiar a restar vidas etc. aquí según hagamos
+        }
+        else if (coll.tag == "Dash orb")
+        {
+            DASH.instance.dash_num++;
+            Destroy(coll.gameObject); // Si hay que optimizar se puede cambiar por un setActive a false
         }
     }
 }

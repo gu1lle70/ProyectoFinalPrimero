@@ -6,15 +6,25 @@ using UnityEngine.InputSystem;
 
 public class DASH : MonoBehaviour
 {
+    public static DASH instance { get; private set; }
+
     [SerializeField]private bool canDash = true;
-    private bool isDashing;
+    public bool isDashing;
     [SerializeField]private float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
-    [SerializeField] private Rigidbody2D rb;
-    
+    public int dash_num = 1;
 
+    [SerializeField] private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
     private void Update()
     {
         if (isDashing)
@@ -24,6 +34,8 @@ public class DASH : MonoBehaviour
         if (PhysicsManager.Instance.IsGrounded)
         {
             canDash = true;
+            if (dash_num <= 0)
+                dash_num = 1;
         }
 
     }
@@ -37,7 +49,10 @@ public class DASH : MonoBehaviour
     }           
 private IEnumerator Dash()
     {
-        canDash = false;
+        dash_num--;
+        if (dash_num <= 0)
+            canDash = false;
+
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;

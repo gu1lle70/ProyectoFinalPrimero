@@ -18,11 +18,14 @@ GameObject:
   - component: {fileID: 2890213497980766603}
   - component: {fileID: 8800880002847733116}
   - component: {fileID: 6235662776289928425}
+  - component: {fileID: 745459333526433009}
   - component: {fileID: 5186773206195845913}
   - component: {fileID: 8689494929702283510}
+  - component: {fileID: 6495303741121787173}
+  - component: {fileID: 4912345344677514676}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: Player_Dani
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,14 +37,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086632009008903650}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39, y: 1.16, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.68, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 372147978485299768}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &554014223235129494
 SpriteRenderer:
@@ -110,9 +113,9 @@ MonoBehaviour:
   IsGrounded: 0
   groundedLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1024
   _groundPos: {fileID: 372147978485299768}
-  _radius: 0.2
+  _radius: 0.12
 --- !u!114 &5282859119827872801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,19 +197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e21f1d7612f4d47abe2f8e90297722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 50
-<<<<<<< HEAD
+  _jumpForce: 5
   _jumpForceAug: 16
-=======
-  _jumpMultiplier: 3
->>>>>>> f693804257e00be20da8cb3f942abf569f06d071
   _jumpBufferTime: 0.2
   _jumpBufferCounter: 0
   _isJumping: 0
   _jumpCooldown: 0.4
-<<<<<<< HEAD
-=======
-  rb: {fileID: 0}
 --- !u!114 &8800880002847733116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +219,7 @@ MonoBehaviour:
   jump_force: 5
   wall_mask:
     serializedVersion: 2
-    m_Bits: 128
->>>>>>> f693804257e00be20da8cb3f942abf569f06d071
+    m_Bits: 2048
 --- !u!114 &6235662776289928425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +259,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5282859119827872801}
+        m_TargetAssemblyTypeName: PlayerSprites, Assembly-CSharp
+        m_MethodName: SetSpriteDirection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 14f1dc0f-aa22-47b4-912a-dad59a70326a
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -276,9 +283,21 @@ MonoBehaviour:
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 601985038963827134}
-        m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
+      - m_Target: {fileID: 2890213497980766603}
+        m_TargetAssemblyTypeName: JUMP, Assembly-CSharp
         m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8800880002847733116}
+        m_TargetAssemblyTypeName: WallJump, Assembly-CSharp
+        m_MethodName: Wall_Jump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -331,18 +350,58 @@ MonoBehaviour:
     m_ActionId: 3ce63952-2d31-4c91-bf38-84a83ffb997e
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1891437792094790108}
+        m_TargetAssemblyTypeName: DASH, Assembly-CSharp
+        m_MethodName: Dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 47ca1d69-bb32-4baf-b599-ce9e67029f93
     m_ActionName: Player/Dash[/Keyboard/r]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4295586221172303243}
+        m_TargetAssemblyTypeName: Pistol, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: eeac7a49-26eb-4170-9812-b5c0dd0b572c
-    m_ActionName: Player/Shoot[/Keyboard/f]
+    m_ActionName: Player/Shoot[/Keyboard/f,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db1e21e3-737a-44fb-ab6b-006d2fc62ea5
+    m_ActionName: UI/Back[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &745459333526433009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bb2d156a86ebc47962df8c42abc5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &5186773206195845913
 Rigidbody2D:
   serializedVersion: 4
@@ -366,7 +425,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -405,6 +464,62 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!95 &6495303741121787173
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2c7a66fa199ec9e43b09ac74ce053db5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &4912345344677514676
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &2754956411538872017
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2754956411538872017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.932, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
