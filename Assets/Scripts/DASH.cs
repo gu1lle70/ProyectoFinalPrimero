@@ -11,8 +11,8 @@ public class DASH : MonoBehaviour
     [SerializeField]private bool canDash = true;
     public bool isDashing;
     [SerializeField]private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
+    [SerializeField]private float dashingTime = 0.2f;
+    [SerializeField]private float dashingCooldown = 1f;
 
     public int dash_num = 1;
 
@@ -46,7 +46,7 @@ public class DASH : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-    }           
+    }
 private IEnumerator Dash()
     {
         dash_num--;

@@ -14,6 +14,7 @@ public class WallJump : MonoBehaviour
     private RaycastHit2D left_hit;
     [SerializeField] private float range;
     [SerializeField] private float jump_force;
+    [SerializeField] private float slide_speed;
     [SerializeField] private LayerMask wall_mask;
 
     private PlayerInput pl_input;
@@ -43,10 +44,10 @@ public class WallJump : MonoBehaviour
         right_hit = Physics2D.Raycast(transform.position, transform.right, range, wall_mask);
         left_hit = Physics2D.Raycast(transform.position, -transform.right, range, wall_mask);
 
-        if (right_hit)
-            Debug.Log("Right");
-        if (left_hit)
-            Debug.Log("Left");
+        if ((right_hit || left_hit) && rb.velocity.y <= 0 && PlayerMove.Instance._dir.y >= 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, slide_speed);
+        }
     }
     public void Wall_Jump(InputAction.CallbackContext con)
     {
@@ -54,8 +55,8 @@ public class WallJump : MonoBehaviour
         {
             Debug.Log("Contact");
 
-            rb.velocity = new Vector2(-jump_force * 0.7f, 0);
-            rb.AddForce((-transform.right + transform.up) * jump_force, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(-jump_force * 0.7f, jump_force);
+            //rb.AddForce((-transform.right + transform.up) * jump_force, ForceMode2D.Impulse);
 
             onWallJump = true;
             StartCoroutine(WallDelay());
@@ -64,8 +65,8 @@ public class WallJump : MonoBehaviour
         {
             Debug.Log("Contact");
 
-            rb.velocity = new Vector2(jump_force * 0.6f, 0);
-            rb.AddForce((transform.right + transform.up) * jump_force, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(jump_force * 0.7f, jump_force);
+            //rb.AddForce((transform.right + transform.up) * jump_force, ForceMode2D.Impulse);
 
             onWallJump = true;
             StartCoroutine(WallDelay());
@@ -74,7 +75,7 @@ public class WallJump : MonoBehaviour
 
     private IEnumerator WallDelay()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         onWallJump = false;
     }
 

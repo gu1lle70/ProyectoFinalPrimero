@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5186773206195845913}
-  _speed: 10
+  _speed: 7
   _slideSpeed: 5
   _wallJumpLerp: 10
   _dashSpeed: 20
@@ -186,6 +186,8 @@ MonoBehaviour:
   canDash: 1
   isDashing: 0
   dashingPower: 5
+  dashingTime: 0.2
+  dashingCooldown: 1.7
   dash_num: 1
   rb: {fileID: 5186773206195845913}
 --- !u!114 &2890213497980766603
@@ -200,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e21f1d7612f4d47abe2f8e90297722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 5
+  _jumpForce: 6
   _jumpForceAug: 16
   _jumpBufferTime: 0.2
   _jumpBufferCounter: 0
@@ -219,8 +221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onWallJump: 0
-  range: 0.68
-  jump_force: 5
+  range: 0.52
+  jump_force: 7
+  slide_speed: -0.5
   wall_mask:
     serializedVersion: 2
     m_Bits: 2048

@@ -47,15 +47,26 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!DASH.instance.isDashing)
+        RaycastHit2D ray_to_ground = Physics2D.Raycast(transform.position, Vector2.down);
+        if (ray_to_ground && Vector2.Distance(transform.position, ray_to_ground.transform.position) > 100 && rb.velocity.y > 0) // El jugador está muy lejos del suelo y sigue subiendo
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -1);
+        }
+
+        Debug.Log(Vector2.Distance(transform.position, ray_to_ground.transform.position));
+
+        if (!DASH.instance.isDashing && !WallJump.instance.onWallJump)
         {
             rb.velocity = new Vector2((_horizontal * _speed * (Time.deltaTime + 1)) + rb.velocity.x, rb.velocity.y);
 
-            if (rb.velocity.magnitude > _speed)
+            if (rb.velocity.magnitude > _speed) // Límite de velocidad
             {
-                rb.velocity = new Vector2(_horizontal * _speed, rb.velocity.y);
+                if (rb.velocity.y > 0)
+                    rb.velocity = new Vector2(_horizontal * _speed, 15 * _vertical);
+                else
+                    rb.velocity = new Vector2(_horizontal * _speed, -15 * _vertical);
             }
-            if (rb.velocity.magnitude > 0 && _dir.x == 0 && PhysicsManager.Instance.IsGrounded)
+            if (rb.velocity.magnitude > 0 && _dir.x == 0 && PhysicsManager.Instance.IsGrounded) // slow cuando dejas de moverte estando en el suelo
             {
                 rb.velocity = new Vector2(rb.velocity.x * _slow_multiplier, rb.velocity.y);
             }

@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator Life()
     {
-        rb.AddForce(transform.right * direction * bulletSpeed * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(transform.right * direction * bulletSpeed, ForceMode2D.Impulse);
         yield return new WaitForSeconds(life_time);
         Destroy(gameObject);
     }
