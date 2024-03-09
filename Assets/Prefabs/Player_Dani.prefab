@@ -162,6 +162,9 @@ MonoBehaviour:
   _fallMultiplier: 2.5
   _lowJumpMultiplier: 2
   _slow_multiplier: 0.8
+  ground_layer:
+    serializedVersion: 2
+    m_Bits: 3072
   _canMove: 0
   _wallGrab: 0
   _wallJumped: 0
@@ -187,7 +190,7 @@ MonoBehaviour:
   isDashing: 0
   dashingPower: 5
   dashingTime: 0.2
-  dashingCooldown: 1.7
+  dashingCooldown: 0.8
   dash_num: 1
   rb: {fileID: 5186773206195845913}
 --- !u!114 &2890213497980766603
@@ -409,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44bb2d156a86ebc47962df8c42abc5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabCooldown: 0.1
 --- !u!50 &5186773206195845913
 Rigidbody2D:
   serializedVersion: 4

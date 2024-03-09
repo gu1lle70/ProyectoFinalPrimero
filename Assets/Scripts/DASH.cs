@@ -9,6 +9,7 @@ public class DASH : MonoBehaviour
     public static DASH instance { get; private set; }
 
     [SerializeField]private bool canDash = true;
+    private bool onCooldown = false;
     public bool isDashing;
     [SerializeField]private float dashingPower = 24f;
     [SerializeField]private float dashingTime = 0.2f;
@@ -41,7 +42,7 @@ public class DASH : MonoBehaviour
     }
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash)
+        if (context.performed && !onCooldown && canDash)
         {
             StartCoroutine(Dash());
         }
@@ -49,13 +50,14 @@ public class DASH : MonoBehaviour
     }
 private IEnumerator Dash()
     {
+        if (dash_num <= 1)
+            onCooldown = true;
+
         dash_num--;
         if (dash_num <= 0)
             canDash = false;
 
         isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
 
         if(PlayerSprites.Instance.spriteRenderer.flipX == false)
         {
@@ -69,8 +71,9 @@ private IEnumerator Dash()
         
         yield return new WaitForSeconds(dashingTime);
        
-        rb.gravityScale = originalGravity;
         isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
+
+        yield return new WaitForSeconds(dashingCooldown - dashingTime);
+        onCooldown = false;
     }
 }

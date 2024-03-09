@@ -28,6 +28,12 @@ public class PlayerSprites : MonoBehaviour
     private void FixedUpdate()
     {
         float vel = rb.velocity.x;
+        float vel_y = rb.velocity.y;
+
+        if (vel_y != 0)
+        {
+            anim.SetBool("grounded", PhysicsManager.Instance.IsGrounded);
+        }
 
         if (vel > 0)
             spriteRenderer.flipX = false;
@@ -38,6 +44,7 @@ public class PlayerSprites : MonoBehaviour
         }
 
         anim.SetFloat("x_velocity", vel);
-        anim.SetFloat("y_velocity", rb.velocity.y);
+        anim.SetFloat("y_velocity", vel_y);
+        
     }
 }

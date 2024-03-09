@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _fallMultiplier = 2.5f;
     [SerializeField] private float _lowJumpMultiplier = 2f;
     [SerializeField] private float _slow_multiplier; // Este se usa --- !! ---
+    [SerializeField] private LayerMask ground_layer; // Este se usa --- !! ---
     [Space]
     [Header("Booleans")]
     [SerializeField] private bool _canMove;
@@ -47,7 +48,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        RaycastHit2D ray_to_ground = Physics2D.Raycast(transform.position, Vector2.down);
+        RaycastHit2D ray_to_ground = Physics2D.Raycast(transform.position, Vector2.down, ground_layer);
         if (ray_to_ground && Vector2.Distance(transform.position, ray_to_ground.transform.position) > 100 && rb.velocity.y > 0) // El jugador está muy lejos del suelo y sigue subiendo
         {
             rb.velocity = new Vector2(rb.velocity.x, -1);
@@ -61,10 +62,7 @@ public class PlayerMove : MonoBehaviour
 
             if (rb.velocity.magnitude > _speed) // Límite de velocidad
             {
-                if (rb.velocity.y > 0)
-                    rb.velocity = new Vector2(_horizontal * _speed, 15 * _vertical);
-                else
-                    rb.velocity = new Vector2(_horizontal * _speed, -15 * _vertical);
+                rb.velocity = new Vector2(_horizontal * _speed, rb.velocity.y);
             }
             if (rb.velocity.magnitude > 0 && _dir.x == 0 && PhysicsManager.Instance.IsGrounded) // slow cuando dejas de moverte estando en el suelo
             {
