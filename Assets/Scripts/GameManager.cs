@@ -48,4 +48,14 @@ public class GameManager : MonoBehaviour
     {
         Screen.fullScreen = value;
     }
+
+    public static void GenerateSound(AudioClip clip)
+    {
+        GameObject ob = new GameObject("Throwable sound");
+        AudioSource a = ob.AddComponent<AudioSource>();
+        a.clip = clip;
+        a.Play();
+
+        Destroy(ob, clip.length);
+    }
 }

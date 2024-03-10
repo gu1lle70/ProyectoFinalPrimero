@@ -8,6 +8,7 @@ public class JUMP : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
+    [SerializeField] private AudioClip jump_sound;
     [SerializeField] private float _jumpForce = 16f;
     [SerializeField] private float _jumpForceAug = 16f;
     [SerializeField] private float _jumpBufferTime = 0.2f;
@@ -39,6 +40,7 @@ public class JUMP : MonoBehaviour
         {
             Debug.Log("Salto1");
             rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
+            GameManager.GenerateSound(jump_sound);
         }
     }
 

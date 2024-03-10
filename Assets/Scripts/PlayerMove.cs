@@ -60,7 +60,7 @@ public class PlayerMove : MonoBehaviour
         {
             rb.velocity = new Vector2((_horizontal * _speed * (Time.deltaTime + 1)) + rb.velocity.x, rb.velocity.y);
 
-            if (rb.velocity.magnitude > _speed) // Límite de velocidad
+            if (rb.velocity.magnitude > _speed * 1.5f) // Límite de velocidad
             {
                 rb.velocity = new Vector2(_horizontal * _speed, rb.velocity.y);
             }

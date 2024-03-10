@@ -30,21 +30,32 @@ public class PlayerSprites : MonoBehaviour
         float vel = rb.velocity.x;
         float vel_y = rb.velocity.y;
 
-        if (vel_y != 0)
+        if (WallJump.instance.sliding)
         {
-            anim.SetBool("grounded", PhysicsManager.Instance.IsGrounded);
+            anim.SetBool("sliding", true);
+            return;
+        }
+        else if (anim.GetBool("sliding"))
+        {
+            anim.SetBool("sliding", false);
         }
 
-        if (vel > 0)
-            spriteRenderer.flipX = false;
-        else if (vel < 0)
+        anim.SetBool("grounded", PhysicsManager.Instance.IsGrounded);
+
+        if (!WallJump.instance.sliding)
         {
-            vel *= -1;
-            spriteRenderer.flipX = true;
+            if (vel > 0)
+                spriteRenderer.flipX = false;
+            else if (vel < 0)
+            {
+                spriteRenderer.flipX = true;
+                vel *= -1;
+            }
         }
+        if (PlayerMove.Instance._dir.x == 0 && !DASH.instance.isDashing)
+            vel = 0;
 
         anim.SetFloat("x_velocity", vel);
         anim.SetFloat("y_velocity", vel_y);
-        
     }
 }

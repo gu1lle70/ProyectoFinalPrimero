@@ -8,6 +8,9 @@ public class DASH : MonoBehaviour
 {
     public static DASH instance { get; private set; }
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip dash_sound;
+
     [SerializeField]private bool canDash = true;
     private bool onCooldown = false;
     public bool isDashing;
@@ -52,6 +55,8 @@ private IEnumerator Dash()
     {
         if (dash_num <= 1)
             onCooldown = true;
+
+        GameManager.GenerateSound(dash_sound);
 
         dash_num--;
         if (dash_num <= 0)
