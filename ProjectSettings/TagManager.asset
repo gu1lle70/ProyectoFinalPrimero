@@ -9,6 +9,7 @@ TagManager:
   - Spikes
   - Dash orb
   - Checkpoint
+  - Teleport
   layers:
   - Default
   - TransparentFX
