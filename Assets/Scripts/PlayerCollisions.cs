@@ -13,21 +13,26 @@ public class PlayerCollisions : MonoBehaviour
     {
         if (coll.tag == "Spikes")
         {
-            Debug.Log("Muerte");
-            //SceneManager.LoadScene("Menu"); // cambiar a restar vidas etc. aquí según hagamos
+            Debug.Log("Death");
+            CheckPoints.Checkpoint_manager.ReturnToCheckpoint(CheckPoints.Checkpoint_manager.current_checkpoint);
         }
         else if (coll.tag == "Dash orb" && !itemGrabbed)
         {
             DASH.instance.dash_num++;
             Destroy(coll.gameObject); // Si hay que optimizar se puede cambiar por un setActive a false
 
-            itemGrabbed = true;
+            StartCoroutine(GrabCooldown());
+        }
+        else if (coll.tag == "Checkpoint" && !itemGrabbed)
+        {
+            CheckPoints.Checkpoint_manager.ClaimCheckpoint();
             StartCoroutine(GrabCooldown());
         }
     }
 
     private IEnumerator GrabCooldown()
     {
+        itemGrabbed = true;
         yield return new WaitForSeconds(grabCooldown);
         itemGrabbed = false;
     }

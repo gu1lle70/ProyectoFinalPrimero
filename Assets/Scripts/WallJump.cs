@@ -64,7 +64,7 @@ public class WallJump : MonoBehaviour
         else if (sliding)
             sliding = false;
 
-        if (!audioSource.isPlaying && (right_hit || left_hit) && rb.velocity.y < 0)
+        if (!audioSource.isPlaying && (right_hit || left_hit) && rb.velocity.y < -0.05f)
         {
             audioSource.clip = slide_clip;
             audioSource.Play();

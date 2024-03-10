@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Spikes
   - Dash orb
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

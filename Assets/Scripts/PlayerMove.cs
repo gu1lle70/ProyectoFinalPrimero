@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, -1);
         }
 
-        Debug.Log(Vector2.Distance(transform.position, ray_to_ground.transform.position));
+        //Debug.Log(Vector2.Distance(transform.position, ray_to_ground.transform.position));
 
         if (!DASH.instance.isDashing && !WallJump.instance.onWallJump)
         {
