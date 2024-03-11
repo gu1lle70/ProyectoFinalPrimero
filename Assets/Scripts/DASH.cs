@@ -61,6 +61,8 @@ private IEnumerator Dash()
         if (dash_num <= 1)
             onCooldown = true;
 
+        Vector2 dir = PlayerMove.Instance._dir;
+
         GameManager.GenerateSound(dash_sound);
         trailRenderer.emitting = true;
 
@@ -69,28 +71,37 @@ private IEnumerator Dash()
             canDash = false;
 
         isDashing = true;
-        if (PlayerSprites.Instance.spriteRenderer.flipX == false)
+        if (dir.x != 0)
         {
-            rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+            rb.velocity = new Vector2(dir.x * dashingPower, dir.y * dashingPower);
         }
         else
         {
-            rb.velocity -= new Vector2(transform.localScale.y * dashingPower, 0f);
+            if (!PhysicsManager.Instance.IsGrounded && dir.y == -1)
+                rb.velocity = new Vector2(0, dir.y * dashingPower);
+            else
+                rb.velocity = new Vector2(dashingPower * PlayerSprites.Instance.facingDirection, dir.y * dashingPower);
         }
-        if(PlayerMove.Instance._dir.y == 1)
+        /*
+        if (PlayerSprites.Instance.spriteRenderer.flipX == false)
         {
-            rb.AddForce(Vector2.up * dashingPower);
+            //rb.velocity = new Vector2(transform.localScale.x * dashingPower, PlayerMove.Instance._dir.y * dashingPower);
+            rb.AddForce(PlayerMove.Instance._dir *  dashingPower, ForceMode2D.Impulse);
         }
-        if (PlayerMove.Instance._dir.y == -1)
+        else
         {
-            rb.AddForce(Vector2.down * dashingPower);
-        }
+            //rb.velocity = new Vector2(transform.localScale.y * -dashingPower, PlayerMove.Instance._dir.y * -dashingPower);
+            rb.AddForce(PlayerMove.Instance._dir * -dashingPower, ForceMode2D.Impulse);
+        }*/
+
 
 
 
         yield return new WaitForSeconds(dashingTime);
        
         isDashing = false;
+
+        rb.velocity = Vector2.zero;
         trailRenderer.emitting = false;
 
         yield return new WaitForSeconds(dashingCooldown - dashingTime);

@@ -9,6 +9,7 @@ public class PlayerSprites : MonoBehaviour
     public static PlayerSprites Instance { get; private set; }
 
     [HideInInspector] public SpriteRenderer spriteRenderer;
+    public int facingDirection = 1;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -45,11 +46,15 @@ public class PlayerSprites : MonoBehaviour
         if (!WallJump.instance.sliding)
         {
             if (vel > 0)
+            {
                 spriteRenderer.flipX = false;
+                facingDirection = 1;
+            }
             else if (vel < 0)
             {
                 spriteRenderer.flipX = true;
                 vel *= -1;
+                facingDirection = -1;
             }
         }
         if (PlayerMove.Instance._dir.x == 0 && !DASH.instance.isDashing)

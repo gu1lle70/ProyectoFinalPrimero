@@ -115,7 +115,7 @@ MonoBehaviour:
   IsGrounded: 0
   groundedLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   _groundPos: {fileID: 372147978485299768}
   _radius: 0.12
 --- !u!114 &5282859119827872801
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
+  facingDirection: 0
 --- !u!114 &601985038963827134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,13 +177,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dash_sound: {fileID: 8300000, guid: 8b71db4e9528a5746b0b7debdd678aee, type: 3}
+  trailRenderer: {fileID: 2070919326436402807}
+  rb: {fileID: 5186773206195845913}
   canDash: 1
   isDashing: 0
-  dashingPower: 5
+  dashingPower: 20
   dashingTime: 0.2
   dashingCooldown: 0.8
   dash_num: 1
-  rb: {fileID: 5186773206195845913}
 --- !u!96 &2070919326436402807
 TrailRenderer:
   serializedVersion: 3
@@ -225,7 +227,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -301,11 +303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump_sound: {fileID: 8300000, guid: 97529daaa9dc8074e93639f7e8bd7b75, type: 3}
   _jumpForce: 7
-  _jumpForceAug: 16
-  _jumpBufferTime: 0.2
-  _jumpBufferCounter: 0
-  _isJumping: 0
-  _jumpCooldown: 0.4
+  coyoteTime: 0.1
+  coyoteTimeCounter: 0
 --- !u!114 &8800880002847733116
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,16 +5,15 @@ using UnityEngine.InputSystem;
 
 public class JUMP : MonoBehaviour
 {
-    private float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
 
+    [Header("Jump sound")]
     [SerializeField] private AudioClip jump_sound;
+    [Header("Jump stats")]
     [SerializeField] private float _jumpForce = 16f;
-    [SerializeField] private float _jumpForceAug = 16f;
-    [SerializeField] private float _jumpBufferTime = 0.2f;
-    [SerializeField] private float _jumpBufferCounter;
-    [SerializeField] private bool _isJumping;
-    [SerializeField] private float _jumpCooldown = 0.4f; 
+
+    [Header("Coyote time")]
+    [SerializeField] private float coyoteTime = 0.2f;
+    [SerializeField] private float coyoteTimeCounter;
     Rigidbody2D rb;
 
     PlayerInput _input;
@@ -29,18 +28,32 @@ public class JUMP : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (!PhysicsManager.Instance.IsGrounded)
+        {
+            coyoteTimeCounter += Time.deltaTime;
+        }
+        else
+        {
+            coyoteTimeCounter = 0;
+        }
+    }
+
     private void Jump_performed(InputAction.CallbackContext context)
     {
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        coyoteTimeCounter = 0;
     }
 
     private void Jump_canceled(InputAction.CallbackContext context)
     {
-        if (PhysicsManager.Instance.IsGrounded == true)
+        if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
         {
             Debug.Log("Salto1");
             rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
             GameManager.GenerateSound(jump_sound);
+            coyoteTimeCounter = 0;
         }
     }
 
