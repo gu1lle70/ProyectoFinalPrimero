@@ -14,7 +14,7 @@ public class PlayerCollisions : MonoBehaviour
         if (coll.tag == "Spikes")
         {
             Debug.Log("Death");
-            CheckPoints.Checkpoint_manager.ReturnToCheckpoint(CheckPoints.Checkpoint_manager.current_checkpoint);
+            CheckPoints.Checkpoint_manager.ReturnToCheckpoint();
         }
         else if (coll.tag == "Dash orb" && !itemGrabbed)
         {
@@ -25,7 +25,8 @@ public class PlayerCollisions : MonoBehaviour
         }
         else if (coll.tag == "Checkpoint" && !itemGrabbed)
         {
-            CheckPoints.Checkpoint_manager.ClaimCheckpoint();
+            CheckPoints.Checkpoint_manager.currentCheckpoint = coll.transform;
+            CameraController.Instance.ChangePosition(coll.GetComponent<CheckPoint>().cameraPlaces);
             StartCoroutine(GrabCooldown());
         }
     }

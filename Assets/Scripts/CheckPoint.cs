@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    public bool claimed;
-    public Transform pos;
-    public uint id;
+    public CameraPlaces cameraPlaces;
 }

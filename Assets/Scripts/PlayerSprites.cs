@@ -9,7 +9,7 @@ public class PlayerSprites : MonoBehaviour
     public static PlayerSprites Instance { get; private set; }
 
     [HideInInspector] public SpriteRenderer spriteRenderer;
-    public int facingDirection = 1;
+    public int facingDirection;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -24,6 +24,8 @@ public class PlayerSprites : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        facingDirection = 1;
     }
 
     private void FixedUpdate()

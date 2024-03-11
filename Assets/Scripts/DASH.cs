@@ -40,7 +40,7 @@ public class DASH : MonoBehaviour
         {
             return;
         }
-        if (PhysicsManager.Instance.IsGrounded)
+        if (PhysicsManager.Instance.IsGrounded || WallJump.instance.sliding)
         {
             canDash = true;
             if (dash_num <= 0)

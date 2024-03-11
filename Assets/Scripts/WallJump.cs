@@ -57,14 +57,14 @@ public class WallJump : MonoBehaviour
             else
                 PlayerSprites.Instance.spriteRenderer.flipX = true;
 
-            rb.velocity = new Vector2(rb.velocity.x, slide_speed);
+            rb.velocity = new Vector2(0, slide_speed);
             sliding = true;
 
         }
         else if (sliding)
             sliding = false;
 
-        if (!audioSource.isPlaying && (right_hit || left_hit) && rb.velocity.y < -0.05f)
+        if (!audioSource.isPlaying && (right_hit || left_hit) && rb.velocity.y < -0.15f)
         {
             audioSource.clip = slide_clip;
             audioSource.Play();

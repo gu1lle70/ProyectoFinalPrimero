@@ -6,8 +6,7 @@ public class CheckPoints : MonoBehaviour
 {
     public static CheckPoints Checkpoint_manager {  get; private set; }
 
-    [SerializeField] private List<CheckPoint> checkPoints;
-    public int current_checkpoint = 0;
+    public Transform currentCheckpoint;
 
     [Header("Player")]
     [SerializeField] private Transform player;
@@ -20,22 +19,8 @@ public class CheckPoints : MonoBehaviour
             Destroy(this);
     }
 
-    public void ClaimCheckpoint()
+    public void ReturnToCheckpoint()
     {
-        if (current_checkpoint + 1 < checkPoints.Count - 1)
-        {
-            if (!checkPoints[current_checkpoint + 1].claimed)
-            {
-                current_checkpoint++;
-                checkPoints[current_checkpoint].claimed = true;
-            }
-        }
-    }
-    public void ReturnToCheckpoint(int n)
-    {
-        if (n >= checkPoints.Count)
-            return;
-        player.position = checkPoints[n].pos.position;
-        current_checkpoint = n;
+        player.position = currentCheckpoint.position;
     }
 }
