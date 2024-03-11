@@ -32,6 +32,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] public float _vertical;
     [SerializeField] public Vector2 _dir;
 
+    private int perviousInput;
     private bool player_static = true;
 
 
@@ -46,6 +47,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     private void FixedUpdate()
     {
         RaycastHit2D ray_to_ground = Physics2D.Raycast(transform.position, Vector2.down, ground_layer);

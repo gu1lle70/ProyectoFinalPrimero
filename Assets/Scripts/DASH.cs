@@ -10,6 +10,11 @@ public class DASH : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioClip dash_sound;
+    [Header("TrailRenderer")]
+    [SerializeField] private TrailRenderer trailRenderer;
+
+    [SerializeField] private Rigidbody2D rb;
+
 
     [SerializeField]private bool canDash = true;
     private bool onCooldown = false;
@@ -20,7 +25,7 @@ public class DASH : MonoBehaviour
 
     public int dash_num = 1;
 
-    [SerializeField] private Rigidbody2D rb;
+   
 
     private void Awake()
     {
@@ -57,14 +62,14 @@ private IEnumerator Dash()
             onCooldown = true;
 
         GameManager.GenerateSound(dash_sound);
+        trailRenderer.emitting = true;
 
         dash_num--;
         if (dash_num <= 0)
             canDash = false;
 
         isDashing = true;
-
-        if(PlayerSprites.Instance.spriteRenderer.flipX == false)
+        if (PlayerSprites.Instance.spriteRenderer.flipX == false)
         {
             rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         }
@@ -72,11 +77,21 @@ private IEnumerator Dash()
         {
             rb.velocity -= new Vector2(transform.localScale.y * dashingPower, 0f);
         }
-        
-        
+        if(PlayerMove.Instance._dir.y == 1)
+        {
+            rb.AddForce(Vector2.up * dashingPower);
+        }
+        if (PlayerMove.Instance._dir.y == -1)
+        {
+            rb.AddForce(Vector2.down * dashingPower);
+        }
+
+
+
         yield return new WaitForSeconds(dashingTime);
        
         isDashing = false;
+        trailRenderer.emitting = false;
 
         yield return new WaitForSeconds(dashingCooldown - dashingTime);
         onCooldown = false;
