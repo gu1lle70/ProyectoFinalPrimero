@@ -38,7 +38,7 @@
                     "id": "85f47949-1e5f-46f7-b16f-6f9278643317",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1)",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -425,6 +425,15 @@
                     "name": "Back",
                     "type": "Button",
                     "id": "db1e21e3-737a-44fb-ab6b-006d2fc62ea5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "09ed3725-64ba-42cf-bb3c-e52aaeed3dc9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -858,6 +867,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f45598e-c7fc-4783-a5fd-f4df38ed89dc",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

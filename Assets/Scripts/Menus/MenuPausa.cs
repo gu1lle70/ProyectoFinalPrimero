@@ -1,17 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuPausa : MonoBehaviour
 {
     [SerializeField] private GameObject _menuPausa;
-
     [SerializeField] private GameObject _botonPausa;
+    [SerializeField] private GameObject _menuOptions;
+
+    [SerializeField] private bool _inPause;
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape) && _inPause == false)
+        {
+            Pausa();
+        }
+        else if (Input.GetKeyUp(KeyCode.Escape) && _inPause == true)
+        {
+            Resume();
+        }
+    }
     public void Pausa()
     {
         Time.timeScale = 0f;
         _botonPausa.SetActive(false);
         _menuPausa.SetActive(true);
+        _inPause = true;
     }
 
     public void Resume()
@@ -19,5 +35,26 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1.0f;
         _botonPausa.SetActive(true);
         _menuPausa.SetActive(false);
+        _inPause = false;
+    }
+
+    public void Options()
+    {
+        _menuPausa.SetActive(false);
+        _menuOptions.SetActive(true);
+    }
+
+    public void CloseOptipns()
+    {
+        _menuPausa.SetActive(true);
+        _menuOptions.SetActive(false);
+    }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(name);
+        Time.timeScale = 1.0f;
+        _menuPausa.SetActive(false);
+        _inPause = false;
     }
 }

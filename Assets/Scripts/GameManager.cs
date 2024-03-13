@@ -10,12 +10,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        if (Instance != null)
+        {
+            Destroy(Instance);
+            
+        }
         else
-            Destroy(this);
-
-        DontDestroyOnLoad(this);
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
     public void LoadScene(string name)

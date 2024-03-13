@@ -26,7 +26,7 @@ public class PlayerCollisions : MonoBehaviour
         else if (coll.tag == "Checkpoint" && !itemGrabbed)
         {
             CheckPoints.Checkpoint_manager.currentCheckpoint = coll.transform;
-            CameraController.Instance.ChangePosition(coll.GetComponent<CheckPoint>().cameraPlaces);
+            //CameraController.Instance.ChangePosition(coll.GetComponent<CheckPoint>().cameraPlaces);
             StartCoroutine(GrabCooldown());
         }
     }
