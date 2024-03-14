@@ -19,6 +19,8 @@ public class PlayerCollisions : MonoBehaviour
         else if (coll.tag == "Dash orb" && !itemGrabbed)
         {
             DASH.instance.dash_num++;
+            DASH.instance.canDash = true;
+            DASH.instance.onCooldown = false;
             Destroy(coll.gameObject); // Si hay que optimizar se puede cambiar por un setActive a false
 
             StartCoroutine(GrabCooldown());
