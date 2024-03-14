@@ -21,14 +21,15 @@ public class PlayerCollisions : MonoBehaviour
             DASH.instance.dash_num++;
             DASH.instance.canDash = true;
             DASH.instance.onCooldown = false;
-            Destroy(coll.gameObject); // Si hay que optimizar se puede cambiar por un setActive a false
+            FollowScript.instance.currentOrbs++;
+            coll.gameObject.SetActive(false); // Si hay que optimizar se puede cambiar por un setActive a false
 
             StartCoroutine(GrabCooldown());
         }
         else if (coll.tag == "Checkpoint" && !itemGrabbed)
         {
             CheckPoints.Checkpoint_manager.currentCheckpoint = coll.transform;
-            //CameraController.Instance.ChangePosition(coll.GetComponent<CheckPoint>().cameraPlaces);
+            coll.GetComponent<CheckPoint>().cameraPlaces.ChangeCameraPlace();
             StartCoroutine(GrabCooldown());
         }
     }
