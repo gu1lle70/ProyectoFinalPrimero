@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CameraPlaces : MonoBehaviour
 {
-    public int cameraZoom;
+    public float cameraZoom;
     [HideInInspector] public Transform position;
     public CameraController.CameraMode cameraMode;
+    public bool canSpawnAnotherCamera;
+    public CameraPlaces secondPlace;
 
 
     private void Start()
@@ -15,7 +17,7 @@ public class CameraPlaces : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Vector3 cameraSize = new Vector3(cameraZoom * 2 - 2.2f, cameraZoom, cameraZoom);
+        Vector3 cameraSize = new Vector3(cameraZoom * 2 - 3f, cameraZoom, cameraZoom);
         Gizmos.DrawWireCube(transform.position, cameraSize);
     }
 }
