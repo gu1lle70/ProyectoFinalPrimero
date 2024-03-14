@@ -180,6 +180,7 @@ MonoBehaviour:
   trailRenderer: {fileID: 2070919326436402807}
   rb: {fileID: 5186773206195845913}
   canDash: 1
+  onCooldown: 0
   isDashing: 0
   dashingPower: 20
   dashingTime: 0.2

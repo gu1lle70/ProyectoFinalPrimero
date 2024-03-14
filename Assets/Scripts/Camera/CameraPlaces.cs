@@ -8,7 +8,7 @@ public class CameraPlaces : MonoBehaviour
     [HideInInspector] public Transform position;
     public CameraController.CameraMode cameraMode;
     public bool canSpawnAnotherCamera;
-    public CameraPlaces secondPlace;
+    public GameObject secondPlace;
 
 
     private void Start()
@@ -19,5 +19,12 @@ public class CameraPlaces : MonoBehaviour
     {
         Vector3 cameraSize = new Vector3(cameraZoom * 2 - 3f, cameraZoom, cameraZoom);
         Gizmos.DrawWireCube(transform.position, cameraSize);
+    }
+
+    public void ChangeCameraPlace()
+    {
+        CameraController.Instance.ChangePosition(this);
+        if (canSpawnAnotherCamera)
+            secondPlace.SetActive(true);
     }
 }
