@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reference: {fileID: 0}
-  offset: {x: -0.7, y: 0.47}
-  spacing: 0
+  offset: {x: -0.7, y: 0.47, z: 0}
+  spacing: 0.5
+  orbsToGenerate: 5
   orbs: []
   currentOrbs: 1
