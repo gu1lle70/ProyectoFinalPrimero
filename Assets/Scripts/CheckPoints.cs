@@ -10,6 +10,9 @@ public class CheckPoints : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private Transform player;
+
+    [Header("Dash orbs parent")]
+    [SerializeField] private GameObject dashOrbs_holder;
     
     void Awake()
     {
@@ -22,5 +25,7 @@ public class CheckPoints : MonoBehaviour
     public void ReturnToCheckpoint()
     {
         player.position = currentCheckpoint.position;
+        for (int i = 0; i < dashOrbs_holder.transform.childCount; i++)
+            dashOrbs_holder.transform.GetChild(i).gameObject.SetActive(true);
     }
 }

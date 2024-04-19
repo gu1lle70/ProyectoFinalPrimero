@@ -16,8 +16,8 @@ public class DASH : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
 
-    [SerializeField]private bool canDash = true;
-    private bool onCooldown = false;
+    public bool canDash = true;
+    public bool onCooldown = false;
     public bool isDashing;
     [SerializeField]private float dashingPower = 24f;
     [SerializeField]private float dashingTime = 0.2f;
@@ -44,7 +44,10 @@ public class DASH : MonoBehaviour
         {
             canDash = true;
             if (dash_num <= 0)
+            {
                 dash_num = 1;
+                FollowScript.instance.currentOrbs = dash_num;
+            }
         }
 
     }
@@ -67,6 +70,8 @@ private IEnumerator Dash()
         trailRenderer.emitting = true;
 
         dash_num--;
+        FollowScript.instance.currentOrbs = dash_num;
+
         if (dash_num <= 0)
             canDash = false;
 

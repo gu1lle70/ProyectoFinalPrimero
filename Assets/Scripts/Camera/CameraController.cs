@@ -68,13 +68,17 @@ public class CameraController : MonoBehaviour
             case CameraMode.STATIC: // Cámara estática -----------------------------------------------------------------------------------------
                 if (moveToNextPosition)
                 {
-                    transform.position = Vector3.Lerp(transform.position, cameraPosition.position.position, offsetSmoothing * Time.deltaTime);
-                    if (Vector2.Distance(transform.position, cameraPosition.position.position) < 0.05f)
-                    {
-                        StartCoroutine(ChangeCameraSize(cameraPosition.cameraZoom / 2));
+                    transform.position = Vector3.Lerp(transform.position, cameraPosition.position.position, (offsetSmoothing / 2) * Time.deltaTime);
+                    StartCoroutine(ChangeCameraSize(cameraPosition.cameraZoom / 2));
 
+                    if (Vector2.Distance(transform.position, cameraPosition.position.position) < 0.05f)
                         moveToNextPosition = false;
-                    }
+                }
+                if (player.transform.position.y > Camera.main.transform.position.y
+                    && Camera.main.transform.position.y >= cameraPosition.position.position.y)
+                {
+                    Vector3 newPos = new Vector3(cameraPosition.position.position.x, player.transform.position.y, cameraPosition.position.position.z);
+                    transform.position = Vector3.Lerp(transform.position, newPos, offsetSmoothing * Time.deltaTime);
                 }
                 break;
         }
@@ -94,13 +98,13 @@ public class CameraController : MonoBehaviour
         if (cameraSize > objective)
             while (Camera.main.orthographicSize > objective)
             {
-                Camera.main.orthographicSize -= 0.05f;
+                Camera.main.orthographicSize -= 0.025f;
                 yield return new WaitForSeconds(0.001f);
             }
         else
             while (Camera.main.orthographicSize < objective)
             {
-                Camera.main.orthographicSize += 0.05f;
+                Camera.main.orthographicSize += 0.025f;
                 yield return new WaitForSeconds(0.001f);
             }
     }

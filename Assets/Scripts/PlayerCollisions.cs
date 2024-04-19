@@ -19,14 +19,17 @@ public class PlayerCollisions : MonoBehaviour
         else if (coll.tag == "Dash orb" && !itemGrabbed)
         {
             DASH.instance.dash_num++;
-            Destroy(coll.gameObject); // Si hay que optimizar se puede cambiar por un setActive a false
+            DASH.instance.canDash = true;
+            DASH.instance.onCooldown = false;
+            FollowScript.instance.currentOrbs++;
+            coll.gameObject.SetActive(false); // Si hay que optimizar se puede cambiar por un setActive a false
 
             StartCoroutine(GrabCooldown());
         }
         else if (coll.tag == "Checkpoint" && !itemGrabbed)
         {
             CheckPoints.Checkpoint_manager.currentCheckpoint = coll.transform;
-            //CameraController.Instance.ChangePosition(coll.GetComponent<CheckPoint>().cameraPlaces);
+            coll.GetComponent<CheckPoint>().cameraPlaces.ChangeCameraPlace();
             StartCoroutine(GrabCooldown());
         }
     }
