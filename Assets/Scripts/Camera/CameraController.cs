@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     public bool izq;
 
     public bool moveToNextPosition;
-    [SerializeField]private CameraPlaces cameraPosition;
+    public CameraPlaces cameraPosition;
 
 
 
@@ -74,8 +74,7 @@ public class CameraController : MonoBehaviour
                     if (Vector2.Distance(transform.position, cameraPosition.position.position) < 0.05f)
                         moveToNextPosition = false;
                 }
-                if (player.transform.position.y > Camera.main.transform.position.y
-                    && Camera.main.transform.position.y >= cameraPosition.position.position.y)
+                if (player.transform.position.y >= cameraPosition.position.position.y)
                 {
                     Vector3 newPos = new Vector3(cameraPosition.position.position.x, player.transform.position.y, cameraPosition.position.position.z);
                     transform.position = Vector3.Lerp(transform.position, newPos, offsetSmoothing * Time.deltaTime);

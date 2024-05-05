@@ -50,11 +50,9 @@ public class JUMP : MonoBehaviour
     {
         if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
         {
-            Debug.Log("Salto1");
             rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
             GameManager.GenerateSound(jump_sound);
             coyoteTimeCounter = 0;
         }
     }
-
 }
