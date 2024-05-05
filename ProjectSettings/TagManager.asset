@@ -10,6 +10,7 @@ TagManager:
   - Dash orb
   - Checkpoint
   - Teleport
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

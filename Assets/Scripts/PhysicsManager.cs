@@ -42,7 +42,4 @@ public class PhysicsManager : MonoBehaviour
         }
         Gizmos.DrawWireSphere(_groundPos.position, _radius);
     }
-
-
-
 }

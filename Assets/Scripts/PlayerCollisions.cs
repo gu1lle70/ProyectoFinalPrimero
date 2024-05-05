@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +33,16 @@ public class PlayerCollisions : MonoBehaviour
             coll.GetComponent<CheckPoint>().cameraPlaces.ChangeCameraPlace();
             StartCoroutine(GrabCooldown());
         }
+        else if (coll.tag == "MovingPlatform")
+        {
+            transform.parent = coll.transform;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (transform.parent != null)
+            transform.parent = null;
     }
 
     private IEnumerator GrabCooldown()
