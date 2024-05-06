@@ -16,8 +16,11 @@ public class SceneTransitions : MonoBehaviour
 
         if (black_bg.color.a < 255)
             black_bg.color = new Color(black_bg.color.r, black_bg.color.g, black_bg.color.b, black_bg.color.a + Time.deltaTime);
-        else
-            SceneManager.LoadScene("ROGER_ZONA_PRUEBAS");
+        else if (black_bg.color.a > 255)
+        {
+            Debug.Log("Cambio escena");
+            SceneManager.LoadScene("PolPruebas");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
