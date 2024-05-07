@@ -7,31 +7,28 @@ public class SceneTransitions : MonoBehaviour
 {
     public static SceneTransitions Instance;
     [SerializeField] private GameObject black_bg;
+    [SerializeField] private string SceneName;
+    [SerializeField] private GameObject NullObject;
 
-    public bool isEnd = false;
+   
 
-    private void Awake()
+    private void BajarAlpha()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(this);
+        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 2f, 1f).setOnComplete(ChangeScene);
+        return;
     }
 
-    public void BajarAlpha()
+    public void Update()
     {
-        Debug.Log("empieza");
-        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 255f, 1f);
-        Debug.Log("acaba");
-        isEnd = false;
-
-    }
-
-    private void Update()
-    {
-        if (isEnd == true)
+        if (NullObject == null)
         {
             BajarAlpha();
         }
     }
+
+    private void ChangeScene()
+    {
+        SceneManager.LoadScene(SceneName);
+    }
+
 }
