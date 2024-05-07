@@ -5,29 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitions : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer black_bg;
+    public static SceneTransitions Instance;
+    [SerializeField] private GameObject black_bg;
 
-    private bool start_fade;
+    public bool isEnd = false;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
+    public void BajarAlpha()
+    {
+        Debug.Log("empieza");
+        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 255f, 1f);
+        Debug.Log("acaba");
+        isEnd = false;
+
+    }
 
     private void Update()
     {
-        if (!start_fade)
-            return;
-
-        if (black_bg.color.a < 255)
-            black_bg.color = new Color(black_bg.color.r, black_bg.color.g, black_bg.color.b, black_bg.color.a + Time.deltaTime);
-        else if (black_bg.color.a > 255)
+        if (isEnd == true)
         {
-            Debug.Log("Cambio escena");
-            SceneManager.LoadScene("PolPruebas");
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.tag == "Player")
-        {
-            start_fade = true;
+            BajarAlpha();
         }
     }
 }

@@ -11,6 +11,8 @@ TagManager:
   - Checkpoint
   - Teleport
   - MovingPlatform
+  - bg_down
+  - bg_top
   layers:
   - Default
   - TransparentFX

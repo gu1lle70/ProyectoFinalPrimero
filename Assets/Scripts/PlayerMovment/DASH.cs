@@ -13,7 +13,7 @@ public class DASH : MonoBehaviour
     [Header("TrailRenderer")]
     [SerializeField] private TrailRenderer trailRenderer;
 
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
 
 
     public bool canDash = true;
@@ -38,8 +38,11 @@ public class DASH : MonoBehaviour
     {
         if (isDashing)
         {
+            rb.gravityScale = 0f;
             return;
         }
+        else
+            rb.gravityScale = 1.2f;
         if (PhysicsManager.Instance.IsGrounded || WallJump.instance.sliding)
         {
             canDash = true;
