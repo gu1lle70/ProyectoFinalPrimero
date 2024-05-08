@@ -12,7 +12,6 @@ public class Animationtutorial : MonoBehaviour
 
     private float typingTime = 0.05f;
 
-    private bool didDialogueStart;
     private int lineIndex;
 
     private bool canPassDialogue;
@@ -27,13 +26,18 @@ public class Animationtutorial : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (animationEnded)
+            if (!animationEnded)
             {
                 StartDialogue();
             }
-            else if (dialogueText.text == dialogueLines[lineIndex]) ;
+            else if (dialogueText.text == dialogueLines[lineIndex])
             {
                 NextDialogueLine();
+            }
+            else
+            {
+                StopAllCoroutines();
+                dialogueText.text = dialogueLines[lineIndex];
             }
         }
     }
@@ -49,13 +53,13 @@ public class Animationtutorial : MonoBehaviour
 
     private void EndAnimation()
     {
-        LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 265, 1.2f);
-        LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -265, 1.2f);
+        LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 280, 1.2f);
+        LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -280, 1.2f);
     }
     private void StartDialogue()
     {
-        didDialogueStart = true;
         lineIndex = 0;
+        Time.timeScale = 0f;
         StartCoroutine(ShowLine());
     }
 
@@ -68,18 +72,20 @@ public class Animationtutorial : MonoBehaviour
         }
         else
         {
-            didDialogueStart = false;
+            EndAnimation();
+            Time.timeScale = 1f;
         }
     }
 
     private IEnumerator ShowLine()
     {
         dialogueText.text = string.Empty;
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSecondsRealtime(0.5f);
         foreach (char ch in dialogueLines[lineIndex])
         {
             dialogueText.text += ch;
-            yield return new WaitForSeconds(typingTime);
+            yield return new WaitForSecondsRealtime(typingTime);
         }
+
     }
 }
