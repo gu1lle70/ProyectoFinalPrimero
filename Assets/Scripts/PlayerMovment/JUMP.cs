@@ -42,17 +42,23 @@ public class JUMP : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext context)
     {
-        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        coyoteTimeCounter = 0;
+        if (PlayerMove.Instance.isNotInTutorial)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteTimeCounter = 0;
+        }
     }
 
     private void Jump_canceled(InputAction.CallbackContext context)
     {
-        if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
+        if (PlayerMove.Instance.isNotInTutorial)
         {
-            rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
-            GameManager.GenerateSound(jump_sound);
-            coyoteTimeCounter = 0;
+            if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
+                GameManager.GenerateSound(jump_sound);
+                coyoteTimeCounter = 0;
+            }
         }
     }
 }

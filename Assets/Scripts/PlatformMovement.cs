@@ -12,8 +12,6 @@ public class PlatformMovement : MonoBehaviour
 
     private int index;
 
-    private bool isActive = false;
-
     // Update is called once per frame
     void Update()
     {      

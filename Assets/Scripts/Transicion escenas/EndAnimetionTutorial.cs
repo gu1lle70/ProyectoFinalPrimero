@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Animationtutorial : MonoBehaviour
+public class EndAnimetionTutorial : MonoBehaviour
 {
     [SerializeField] GameObject bg_top;
     [SerializeField] GameObject bg_down;
@@ -18,30 +16,30 @@ public class Animationtutorial : MonoBehaviour
 
     private int lineIndex;
 
-    private bool canPassDialogue;
     private bool animationEnded = false;
+    
 
-    private void Start()
-    {
-        StartAnimation();
-    }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (TriggerFinish.Instance.finishTutorial)
         {
-            if (!animationEnded)
+            StartAnimation();
+            if (Input.GetButtonDown("Fire1"))
             {
-                StartDialogue();
-            }
-            else if (dialogueText.text == dialogueLines[lineIndex])
-            {
-                NextDialogueLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                dialogueText.text = dialogueLines[lineIndex];
+                if (!animationEnded)
+                {
+                    StartDialogue();
+                }
+                else if (dialogueText.text == dialogueLines[lineIndex])
+                {
+                    NextDialogueLine();
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    dialogueText.text = dialogueLines[lineIndex];
+                }
             }
         }
     }
@@ -63,8 +61,6 @@ public class Animationtutorial : MonoBehaviour
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -280, 1.2f);
         LeanTween.moveX(character.GetComponent<RectTransform>(), 510, 1f).setEase(LeanTweenType.easeInOutBack);
         PlayerMove.Instance.isNotInTutorial = true;
-        StopAllCoroutines();
-        Destroy(this.GameObject());
     }
     private void StartDialogue()
     {
@@ -98,4 +94,5 @@ public class Animationtutorial : MonoBehaviour
         clickToContinue.SetActive(true);
 
     }
+   
 }
