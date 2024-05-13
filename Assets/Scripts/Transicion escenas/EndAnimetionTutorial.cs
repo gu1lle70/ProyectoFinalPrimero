@@ -9,6 +9,8 @@ public class EndAnimetionTutorial : MonoBehaviour
     [SerializeField] GameObject bg_down;
     [SerializeField] GameObject character;
     [SerializeField] GameObject clickToContinue;
+    [SerializeField] GameObject dialogueMark;
+
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField, TextArea(4, 6)] private string[] dialogueLines;
 
@@ -16,31 +18,37 @@ public class EndAnimetionTutorial : MonoBehaviour
 
     private int lineIndex;
 
-    private bool animationEnded = false;
-    
-
+    private bool didDialogeStart = false;
+    public bool finishTutorial = false;
 
     private void Update()
     {
-        if (TriggerFinish.Instance.finishTutorial)
+        if (finishTutorial && Input.GetButtonDown("Fire1"))
         {
             StartAnimation();
-            if (Input.GetButtonDown("Fire1"))
+            if (!didDialogeStart)
             {
-                if (!animationEnded)
-                {
-                    StartDialogue();
-                }
-                else if (dialogueText.text == dialogueLines[lineIndex])
-                {
-                    NextDialogueLine();
-                }
-                else
-                {
-                    StopAllCoroutines();
-                    dialogueText.text = dialogueLines[lineIndex];
-                }
+                StartDialogue();
             }
+            else if (dialogueText.text == dialogueLines[lineIndex])
+            {
+                NextDialogueLine();
+            }
+            else
+            {
+                StopAllCoroutines();
+                dialogueText.text = dialogueLines[lineIndex];
+            }
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            Debug.Log("empieza final tutorial");
+            finishTutorial = true;
         }
     }
 
@@ -50,9 +58,7 @@ public class EndAnimetionTutorial : MonoBehaviour
         PlayerMove.Instance.isNotInTutorial = false;
         LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 180, 1f).setEase(LeanTweenType.easeOutCubic);
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -180, 1f).setEase(LeanTweenType.easeOutCubic);
-        LeanTween.moveX(character.GetComponent<RectTransform>(), 330, 1f).setEase(LeanTweenType.easeInOutBack).setDelay(0.4f)
-            .setOnComplete(StartDialogue);
-        animationEnded = true;
+        LeanTween.moveX(character.GetComponent<RectTransform>(), 330, 1f).setEase(LeanTweenType.easeInOutBack).setDelay(0.4f);
     }
 
     private void EndAnimation()
@@ -61,9 +67,12 @@ public class EndAnimetionTutorial : MonoBehaviour
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -280, 1.2f);
         LeanTween.moveX(character.GetComponent<RectTransform>(), 510, 1f).setEase(LeanTweenType.easeInOutBack);
         PlayerMove.Instance.isNotInTutorial = true;
+        dialogueMark.SetActive(true);
     }
     private void StartDialogue()
     {
+        dialogueMark.SetActive(false);
+        didDialogeStart = true;
         lineIndex = 0;
         StartCoroutine(ShowLine());
     }
@@ -77,6 +86,8 @@ public class EndAnimetionTutorial : MonoBehaviour
         }
         else
         {
+
+            didDialogeStart = false;
             EndAnimation();
         }
     }
@@ -85,7 +96,7 @@ public class EndAnimetionTutorial : MonoBehaviour
     {
         clickToContinue.SetActive(false);
         dialogueText.text = string.Empty;
-        yield return new WaitForSecondsRealtime(0.2f);
+        yield return new WaitForSecondsRealtime(1.2f);
         foreach (char ch in dialogueLines[lineIndex])
         {
             dialogueText.text += ch;
@@ -94,5 +105,5 @@ public class EndAnimetionTutorial : MonoBehaviour
         clickToContinue.SetActive(true);
 
     }
-   
+
 }

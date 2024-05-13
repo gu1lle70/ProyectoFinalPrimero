@@ -15,7 +15,7 @@ public class FadeInTransition : MonoBehaviour
 
     private void SubirAlpha()
     {
-        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 0f, 1.5f).setDelay(0.5f);
+        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 0f, 1.5f).setDelay(1f);
     }
 
    
