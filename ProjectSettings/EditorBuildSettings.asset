@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu inicial.unity
     guid: b9ddb4f69eb84024794b04cd233c47fe
   - enabled: 1
-    path: Assets/Scenes/Dani pruebas.unity
-    guid: 7992bcbb712f3ca4cac1857fb4de52b1
+    path: Assets/Scenes/Tutorial.unity
+    guid: cf700da83c402d543b18a1d215c7971b
   - enabled: 1
     path: Assets/Scenes/PolPruebas.unity
     guid: f2cc27a3b45a73e439cb2f5af67c33ae
+  - enabled: 1
+    path: Assets/Scenes/Dani pruebas.unity
+    guid: 7992bcbb712f3ca4cac1857fb4de52b1
   m_configObjects: {}

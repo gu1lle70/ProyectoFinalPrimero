@@ -11,6 +11,8 @@ public class Animationtutorial : MonoBehaviour
     [SerializeField] GameObject bg_down;
     [SerializeField] GameObject character;
     [SerializeField] GameObject clickToContinue;
+    [SerializeField] GameObject black_bg;
+
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField, TextArea(4, 6)] private string[] dialogueLines;
 
@@ -23,7 +25,7 @@ public class Animationtutorial : MonoBehaviour
 
     private void Start()
     {
-        StartAnimation();
+        FadeOut();
     }
 
     private void Update()
@@ -46,10 +48,15 @@ public class Animationtutorial : MonoBehaviour
         }
     }
 
+    private void FadeOut()
+    {
+
+        PlayerMove.Instance.isNotInTutorial = false;
+        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 0f, 1.5f).setDelay(1f).setOnComplete(StartAnimation);
+    }
 
     private void StartAnimation()
     {
-        PlayerMove.Instance.isNotInTutorial = false;
         LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 180, 1f).setEase(LeanTweenType.easeOutCubic);
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -180, 1f).setEase(LeanTweenType.easeOutCubic);
         LeanTween.moveX(character.GetComponent<RectTransform>(), 330, 1f).setEase(LeanTweenType.easeInOutBack).setDelay(0.4f)
