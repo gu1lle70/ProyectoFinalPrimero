@@ -23,7 +23,6 @@ public class JUMP : MonoBehaviour
         _input.Player.Enable();
         
         _input.Player.Jump.performed += Jump_performed;
-        _input.Player.Jump.canceled += Jump_canceled;
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -44,15 +43,6 @@ public class JUMP : MonoBehaviour
     {
         if (PlayerMove.Instance.isNotInTutorial)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            coyoteTimeCounter = 0;
-        }
-    }
-
-    private void Jump_canceled(InputAction.CallbackContext context)
-    {
-        if (PlayerMove.Instance.isNotInTutorial)
-        {
             if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
             {
                 rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
@@ -61,4 +51,5 @@ public class JUMP : MonoBehaviour
             }
         }
     }
+
 }
