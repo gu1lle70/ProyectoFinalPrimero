@@ -29,7 +29,7 @@ public class DASH : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance == null)   
             instance = this;
         else
             Destroy(this);
@@ -39,7 +39,7 @@ public class DASH : MonoBehaviour
         if (isDashing)
         {
             rb.gravityScale = 0f;
-            return;
+            return; 
         }
         else
             rb.gravityScale = 1.2f;
