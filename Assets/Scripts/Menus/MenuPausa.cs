@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MenuPausa : MonoBehaviour
 {
     [SerializeField] private GameObject _menuPausa;
-    [SerializeField] private GameObject _botonPausa;
     [SerializeField] private GameObject _menuOptions;
 
     [SerializeField] private bool _inPause;
@@ -20,12 +19,12 @@ public class MenuPausa : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Escape) && _inPause == true)
         {
             Resume();
+            _menuOptions.SetActive(false);
         }
     }
     public void Pausa()
     {
         Time.timeScale = 0f;
-        _botonPausa.SetActive(false);
         _menuPausa.SetActive(true);
         _inPause = true;
     }
@@ -33,7 +32,6 @@ public class MenuPausa : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1.0f;
-        _botonPausa.SetActive(true);
         _menuPausa.SetActive(false);
         _inPause = false;
     }
