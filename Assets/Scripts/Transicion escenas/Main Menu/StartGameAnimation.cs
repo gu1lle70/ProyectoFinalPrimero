@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class StartGameAnimation : MonoBehaviour
 {
+    [SerializeField] private GameObject _optionsMenu;
     [SerializeField] private Image Block_Buttons;
     [SerializeField] private GameObject _BG_Izq;
     [SerializeField] private GameObject _BG_Der;
@@ -15,13 +16,23 @@ public class StartGameAnimation : MonoBehaviour
     [SerializeField] private GameObject Text3;
     public string sceneName;
 
+    public void OptionsAnimationOpen()
+    {
+        LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 14.0f, 1.5f).setEase(LeanTweenType.easeOutBounce);
+    }
+
+    public void OptionsAnimationClose()
+    {
+        LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 958.0f, 1.5f).setEase(LeanTweenType.easeInBack);
+    }
+
 
     public void StartAnimation()
     {
         Block_Buttons.gameObject.SetActive(true);
         Block_Buttons.raycastTarget = true;
-        LeanTween.moveX(_BG_Izq.GetComponent<RectTransform>(), -202, 1.5f).setEase(LeanTweenType.easeOutBounce);
-        LeanTween.moveX(_BG_Der.GetComponent<RectTransform>(), 200, 1.5f).setEase(LeanTweenType.easeOutBounce).setOnComplete(StartText);
+        LeanTween.moveX(_BG_Izq.GetComponent<RectTransform>(), -488, 1.5f).setEase(LeanTweenType.easeOutBounce);
+        LeanTween.moveX(_BG_Der.GetComponent<RectTransform>(), 486, 1.5f).setEase(LeanTweenType.easeOutBounce).setOnComplete(StartText);
     }
 
     private void StartText()
