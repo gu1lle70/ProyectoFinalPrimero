@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6235662776289928425}
   - component: {fileID: 745459333526433009}
   - component: {fileID: 5186773206195845913}
-  - component: {fileID: 8689494929702283510}
+  - component: {fileID: 5466802497981182360}
   - component: {fileID: 6495303741121787173}
   - component: {fileID: 4912345344677514676}
   - component: {fileID: 559679552830412199}
@@ -146,24 +146,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5186773206195845913}
   _speed: 7
-  _slideSpeed: 5
-  _wallJumpLerp: 10
-  _dashSpeed: 20
-  _fallMultiplier: 2.5
-  _lowJumpMultiplier: 2
   _slow_multiplier: 0.8
   ground_layer:
     serializedVersion: 2
     m_Bits: 3072
-  _canMove: 0
-  _wallGrab: 0
-  _wallJumped: 0
-  _wallSlide: 0
-  _isDashing: 0
-  _hasDashed: 0
   _horizontal: 0
   _vertical: 0
   _dir: {x: 0, y: 0}
+  isNotInTutorial: 1
 --- !u!114 &1891437792094790108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +483,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: db1e21e3-737a-44fb-ab6b-006d2fc62ea5
     m_ActionName: UI/Back[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09ed3725-64ba-42cf-bb3c-e52aaeed3dc9
+    m_ActionName: UI/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -538,8 +532,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &8689494929702283510
-CapsuleCollider2D:
+--- !u!61 &5466802497981182360
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -570,9 +564,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.03}
-  m_Size: {x: 0.15, y: 0.3}
-  m_Direction: 0
+  m_Offset: {x: 0.00016354024, y: -0.03017788}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.37}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16031873, y: 0.29047906}
+  m_EdgeRadius: 0
 --- !u!95 &6495303741121787173
 Animator:
   serializedVersion: 5
