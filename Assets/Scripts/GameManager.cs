@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
+    public Toggle toggle;
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -20,6 +23,16 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+    }
+    private void Start()
+    {
+        Screen.fullScreen = true;
+
+        if (Screen.fullScreen)
+        {
+            toggle.isOn = true;
+        }
+        else { toggle.isOn = false;}
     }
 
     public void LoadScene(string name)
