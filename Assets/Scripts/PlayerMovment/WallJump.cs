@@ -50,6 +50,9 @@ public class WallJump : MonoBehaviour
         right_hit = Physics2D.Raycast(transform.position, transform.right, range, wall_mask);
         left_hit = Physics2D.Raycast(transform.position, -transform.right, range, wall_mask);
 
+        if (!right_hit || !left_hit)
+            sliding = false;
+
         if ((right_hit || left_hit) && rb.velocity.y <= 0 && PlayerMove.Instance._dir.y >= 0)
         {
             if (right_hit)
