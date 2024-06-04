@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,11 @@ public class FollowScript : MonoBehaviour
 
     [SerializeField] private int orbsToGenerate;
     [SerializeField] private List<Transform> orbs;
+    private List<SpriteRenderer> orbsRenderer;
     private int lastInLine;
     public int currentOrbs;
 
+    private List<bool> orbsUsed;
     private void Awake()
     {
         if (instance == null)
@@ -28,12 +31,17 @@ public class FollowScript : MonoBehaviour
         {
             transform
         };
+        orbsRenderer = new List<SpriteRenderer>();
+        orbsUsed = new List<bool>();
 
         for (int i = 0; i < orbsToGenerate; i++)
         {
             GameObject ob = Instantiate(this.gameObject, transform.parent);
-            orbs.Add(ob.transform);
             ob.transform.position = new Vector3(1000, 1000, 0);
+
+            orbs.Add(ob.transform);
+            orbsUsed.Add(false);
+            orbsRenderer.Add(ob.GetComponent<SpriteRenderer>());
         }
 
         offset.z = 0;
@@ -59,7 +67,33 @@ public class FollowScript : MonoBehaviour
                 distance = Vector2.Distance(orbs[i].position, orbs[i - 1].position);
             }
 
+            orbsUsed[i] = true;
+
             orbs[i].position = Vector2.Lerp(orbs[i].position, pos, distance * (Time.deltaTime + 0.1f));
+        }
+        
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < orbsUsed.Count; i++)
+        {
+            if (i >= currentOrbs)
+                orbsUsed[i] = false;
+
+            Color col = orbs[i].GetComponent<SpriteRenderer>().color;
+            if (orbsUsed[i])
+            {
+                if (col.a < 255)
+                    col.a += Time.deltaTime * 5;
+            }
+            else
+            {
+                if (col.a > 0)
+                    col.a -= Time.deltaTime * 5;
+            }
+
+            orbs[i].GetComponent<SpriteRenderer>().color = col;
         }
     }
 
