@@ -887,7 +887,7 @@ MonoBehaviour:
 
     Asi que ten cuidado...'
   typingTime: 0.05
-  SceneName: PolPruebas
+  SceneName: Nivel1
   finishTutorial: 0
 --- !u!1 &252171531
 GameObject:
@@ -1245,8 +1245,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0021499991, y: 0.00014996529, z: 0}
-    m_Extent: {x: 1.50615, y: 1.49895, z: 0}
+    m_Center: {x: 0.00029999018, y: 0.005400002, z: 0}
+    m_Extent: {x: 1.5041001, y: 1.5037, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2619,8 +2619,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0023499727, y: -0.005400002, z: 0}
-    m_Extent: {x: 1.50265, y: 1.5028, z: 0}
+    m_Center: {x: 0.001249969, y: -0.0020999908, z: 0}
+    m_Extent: {x: 1.50845, y: 1.5021, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6022,8 +6022,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0021499991, y: 0.0012999773, z: 0}
-    m_Extent: {x: 1.49705, y: 1.5038, z: 0}
+    m_Center: {x: 0.00075000525, y: -0.0021499991, z: 0}
+    m_Extent: {x: 1.50565, y: 1.50175, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6254,8 +6254,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.001949966, y: 0.003000021, z: 0}
-    m_Extent: {x: 1.50015, y: 1.5066, z: 0}
+    m_Center: {x: -0.002949953, y: -0.00020003319, z: 0}
+    m_Extent: {x: 1.49965, y: 1.5044, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
