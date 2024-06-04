@@ -229,7 +229,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabCooldown: 0.1
+  lava_sound: {fileID: 8300000, guid: 493078ede99105944b8f4d70a780e771, type: 3}
 --- !u!50 &5186773206195845913
 Rigidbody2D:
   serializedVersion: 4

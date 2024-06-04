@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] private float grabCooldown;
+    [SerializeField] private AudioClip lava_sound;
     private bool itemGrabbed = false;
 
     // Tiene que haber un collider en trigger para que funcione
@@ -15,7 +16,9 @@ public class PlayerCollisions : MonoBehaviour
         if (coll.tag == "Spikes")
         {
             Debug.Log("Death");
+            
             CheckPoints.Checkpoint_manager.ReturnToCheckpoint();
+
         }
         else if (coll.tag == "Dash orb" && !itemGrabbed)
         {
