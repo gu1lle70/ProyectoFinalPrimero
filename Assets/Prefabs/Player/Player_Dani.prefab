@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 4912345344677514676}
   - component: {fileID: 559679552830412199}
   - component: {fileID: 6069517610833490446}
+  - component: {fileID: 5369586834399072749}
   m_Layer: 0
   m_Name: Player_Dani
   m_TagString: Player
@@ -744,6 +745,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &5369586834399072749
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086632009008903650}
+  m_Enabled: 1
 --- !u!1 &2754956411538872017
 GameObject:
   m_ObjectHideFlags: 0
