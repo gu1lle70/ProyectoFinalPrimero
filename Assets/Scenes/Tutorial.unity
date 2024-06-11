@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 245315269}
   - component: {fileID: 245315268}
   - component: {fileID: 245315271}
+  - component: {fileID: 245315272}
   m_Layer: 0
   m_Name: character
   m_TagString: Untagged
@@ -783,7 +784,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.37}
+    oldSize: {x: 0.2, y: 0.38}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -833,7 +834,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 99b957485f317b443af26475983a4c1b, type: 3}
+  m_Sprite: {fileID: -657832647, guid: 5de68e3e88146de4994e53457ab2761c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -880,7 +881,7 @@ MonoBehaviour:
   black_bg: {fileID: 352522859}
   dialogueText: {fileID: 588478467}
   dialogueLines:
-  - Bien echo! Aprendes rapido!
+  - Bien echo Kael! Aprendes rapido!
   - Mientras mas avances en la aventura iras descubriendo nuevas habilidades y encontraras
     retos mas dificiles!
   - 'Ahora empieza la aventura de verdad...
@@ -889,6 +890,27 @@ MonoBehaviour:
   typingTime: 0.05
   SceneName: Nivel1
   finishTutorial: 0
+--- !u!95 &245315272
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245315266}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d45dfd07e6190540a65262302097ac5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &252171531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,8 +1267,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00029999018, y: 0.005400002, z: 0}
-    m_Extent: {x: 1.5041001, y: 1.5037, z: 0}
+    m_Center: {x: 0.004450023, y: 0.001150012, z: 0}
+    m_Extent: {x: 1.50195, y: 1.50705, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1714,7 +1736,7 @@ MonoBehaviour:
   black_bg: {fileID: 352522859}
   dialogueText: {fileID: 776015255}
   dialogueLines:
-  - Hola! Soy Ernesto y te voy a dar unos consejos basicos para jugar!
+  - Hola! Soy Liora y te voy a dar unos consejos basicos para jugar!
   - Para moverte a la izquierda y a la derecha usa las teclas A y D respectivamente!
   - Y para saltar usa el espacio!
   - Ahora pruebalo tu mismo!
@@ -1973,6 +1995,10 @@ PrefabInstance:
       propertyPath: m_AutoTiling
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 813387175}
     - target: {fileID: 6235662776289928425, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2619,8 +2645,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.001249969, y: -0.0020999908, z: 0}
-    m_Extent: {x: 1.50845, y: 1.5021, z: 0}
+    m_Center: {x: -0.0014500022, y: 0.002649963, z: 0}
+    m_Extent: {x: 1.4992499, y: 1.4979501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5720,7 +5746,7 @@ RectTransform:
   m_GameObject: {fileID: 1687551912}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 11}
-  m_LocalScale: {x: 3.4662, y: 3.4662, z: 3.4662}
+  m_LocalScale: {x: 2, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1662271697}
@@ -5751,7 +5777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76510a7ba662b2a4b9af7e43536c195f, type: 3}
+  m_Sprite: {fileID: -657832647, guid: 5de68e3e88146de4994e53457ab2761c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6022,8 +6048,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.00075000525, y: -0.0021499991, z: 0}
-    m_Extent: {x: 1.50565, y: 1.50175, z: 0}
+    m_Center: {x: 0.00034999847, y: 0.0019999743, z: 0}
+    m_Extent: {x: 1.50235, y: 1.5063, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6254,8 +6280,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.002949953, y: -0.00020003319, z: 0}
-    m_Extent: {x: 1.49965, y: 1.5044, z: 0}
+    m_Center: {x: 0.0027999878, y: 0.007349968, z: 0}
+    m_Extent: {x: 1.4978, y: 1.49905, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

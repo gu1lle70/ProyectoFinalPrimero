@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Animationtutorial : MonoBehaviour
+public class AnimationTutorial : MonoBehaviour
 {
     [SerializeField] GameObject bg_top;
     [SerializeField] GameObject bg_down;
@@ -22,6 +22,7 @@ public class Animationtutorial : MonoBehaviour
 
     private bool canPassDialogue;
     private bool animationEnded = false;
+    private bool isFadingOut = true; // Nueva bandera para controlar el fade out
 
     private void Start()
     {
@@ -32,11 +33,10 @@ public class Animationtutorial : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (!animationEnded)
-            {
-                StartDialogue();
-            }
-            else if (dialogueText.text == dialogueLines[lineIndex])
+            // Si el fade out está en progreso o la animación no ha terminado, no hacer nada
+            if (isFadingOut || !animationEnded) return;
+
+            if (dialogueText.text == dialogueLines[lineIndex])
             {
                 NextDialogueLine();
             }
@@ -50,9 +50,12 @@ public class Animationtutorial : MonoBehaviour
 
     private void FadeOut()
     {
-
         PlayerMove.Instance.isNotInTutorial = false;
-        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 0f, 1.5f).setDelay(1f).setOnComplete(StartAnimation);
+        LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 0f, 1.5f).setDelay(1f).setOnComplete(() =>
+        {
+            isFadingOut = false; // Actualizar bandera al completar fade out
+            StartAnimation();
+        });
     }
 
     private void StartAnimation()
@@ -60,8 +63,11 @@ public class Animationtutorial : MonoBehaviour
         LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 180, 1f).setEase(LeanTweenType.easeOutCubic);
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -180, 1f).setEase(LeanTweenType.easeOutCubic);
         LeanTween.moveX(character.GetComponent<RectTransform>(), 330, 1f).setEase(LeanTweenType.easeInOutBack).setDelay(0.4f)
-            .setOnComplete(StartDialogue);
-        animationEnded = true;
+            .setOnComplete(() =>
+            {
+                animationEnded = true;
+                StartDialogue();
+            });
     }
 
     private void EndAnimation()
@@ -71,8 +77,9 @@ public class Animationtutorial : MonoBehaviour
         LeanTween.moveX(character.GetComponent<RectTransform>(), 510, 1f).setEase(LeanTweenType.easeInOutBack);
         PlayerMove.Instance.isNotInTutorial = true;
         StopAllCoroutines();
-        Destroy(this.GameObject());
+        Destroy(this.gameObject);
     }
+
     private void StartDialogue()
     {
         lineIndex = 0;
@@ -103,6 +110,5 @@ public class Animationtutorial : MonoBehaviour
             yield return new WaitForSecondsRealtime(typingTime);
         }
         clickToContinue.SetActive(true);
-
     }
 }
