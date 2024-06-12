@@ -14,6 +14,7 @@ public class StartGameAnimation : MonoBehaviour
     [SerializeField] private GameObject Text1;
     [SerializeField] private GameObject Text2;
     [SerializeField] private GameObject Text3;
+    [SerializeField] private AudioManager audioManager;
     public string sceneName;
 
     public void OptionsAnimationOpen()
@@ -44,9 +45,11 @@ public class StartGameAnimation : MonoBehaviour
         LeanTween.alpha(Text2.GetComponentInChildren<RectTransform>(), 0f, 2.0f).setDelay(6.0f);
         LeanTween.alpha(Text3.GetComponentInChildren<RectTransform>(), 0f, 2.0f).setDelay(14.0f);
         LeanTween.alpha(Block_Buttons.GetComponent<RectTransform>(),3f, 2.5f).setDelay(18.5f).setOnComplete(ChangeScene);
+        
     }
     private void ChangeScene()
     {
+        audioManager.FadeOutMusic();
         SceneManager.LoadScene(sceneName);
     }
 }

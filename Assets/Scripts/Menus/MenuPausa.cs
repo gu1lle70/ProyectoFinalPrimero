@@ -12,7 +12,7 @@ public class MenuPausa : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) && _inPause == false)
+        if (Input.GetKeyUp(KeyCode.Escape) && _inPause == false && PlayerMove.Instance.isNotInTutorial == true)
         {
             Pausa();
         }

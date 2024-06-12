@@ -9,6 +9,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class GameManager : MonoBehaviour
 {
     public Toggle toggle;
+    public ParticleSystem dust;
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
         if (Instance != null)
         {
             Destroy(Instance);
-            
+
         }
         else
         {
@@ -28,11 +29,11 @@ public class GameManager : MonoBehaviour
     {
         Screen.fullScreen = true;
 
-        if (Screen.fullScreen)
+        if (toggle != null)
         {
-            toggle.isOn = true;
+            toggle.isOn = !Screen.fullScreen;
         }
-        else { toggle.isOn = false;}
+        else { toggle.isOn = false; }
     }
 
     public void LoadScene(string name)
@@ -63,9 +64,15 @@ public class GameManager : MonoBehaviour
 
     public void MaximizeWindow(bool value)
     {
-        Screen.fullScreen = value;
+        if (toggle != null)
+        {
+            Screen.fullScreen = !toggle.isOn;
+        };
     }
-
+    public void CreateDust()
+    {
+            dust.Play();
+    }
     public static void GenerateSound(AudioClip clip)
     {
         GameObject ob = new GameObject("Throwable sound");

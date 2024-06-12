@@ -10,10 +10,10 @@ public class DASH : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioClip dash_sound;
-    [Header("TrailRenderer")]
-    [SerializeField] private TrailRenderer trailRenderer;
 
     [SerializeField] public Rigidbody2D rb;
+    public SpriteRenderer spriteRenderer;
+    public GhostController ghostController;
 
 
     public bool canDash = true;
@@ -25,14 +25,18 @@ public class DASH : MonoBehaviour
 
     public int dash_num = 1;
 
-   
 
+    private void Start()
+    {
+        ghostController.enabled = false;
+    }
     private void Awake()
     {
         if (instance == null)   
             instance = this;
         else
             Destroy(this);
+      
     }
     private void Update()
     {
@@ -70,7 +74,7 @@ private IEnumerator Dash()
         Vector2 dir = PlayerMove.Instance._dir;
 
         GameManager.GenerateSound(dash_sound);
-        trailRenderer.emitting = true;
+        ghostController.enabled = true;
 
         dash_num--;
         FollowScript.instance.currentOrbs = dash_num;
@@ -110,7 +114,7 @@ private IEnumerator Dash()
         isDashing = false;
 
         rb.velocity = Vector2.zero;
-        trailRenderer.emitting = false;
+        ghostController.enabled = false;
 
         yield return new WaitForSeconds(dashingCooldown - dashingTime);
         onCooldown = false;

@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class AnimationTutorial : MonoBehaviour
 {
+    public static AnimationTutorial Instance { get; private set; }
+
     [SerializeField] GameObject bg_top;
     [SerializeField] GameObject bg_down;
     [SerializeField] GameObject character;
@@ -17,6 +19,7 @@ public class AnimationTutorial : MonoBehaviour
     [SerializeField, TextArea(4, 6)] private string[] dialogueLines;
 
     [SerializeField] private float typingTime = 0.05f;
+    [SerializeField] public bool hasFinished = false;
 
     private int lineIndex;
 
@@ -27,6 +30,7 @@ public class AnimationTutorial : MonoBehaviour
     private void Start()
     {
         FadeOut();
+        hasFinished = false;
     }
 
     private void Update()
@@ -96,6 +100,7 @@ public class AnimationTutorial : MonoBehaviour
         else
         {
             EndAnimation();
+            
         }
     }
 

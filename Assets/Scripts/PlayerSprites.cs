@@ -8,7 +8,7 @@ public class PlayerSprites : MonoBehaviour
 {
     public static PlayerSprites Instance { get; private set; }
 
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     public int facingDirection;
 
     private Rigidbody2D rb;
@@ -28,9 +28,13 @@ public class PlayerSprites : MonoBehaviour
         facingDirection = 1;
     }
 
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void FixedUpdate()
     {
-        float vel = rb.velocity.x;
         float vel_y = rb.velocity.y;
 
         if (WallJump.instance.sliding)
@@ -45,24 +49,27 @@ public class PlayerSprites : MonoBehaviour
 
         anim.SetBool("grounded", PhysicsManager.Instance.IsGrounded);
 
-        if (!WallJump.instance.sliding)
-        {
-            if (vel > 0)
-            {
-                spriteRenderer.flipX = false;
-                facingDirection = 1;
-            }
-            else if (vel < 0)
-            {
-                spriteRenderer.flipX = true;
-                vel *= -1;
-                facingDirection = -1;
-            }
-        }
+        UpdateFacingDirection(PlayerMove.Instance._dir.x);
+
+        float vel = Mathf.Abs(rb.velocity.x);
         if (PlayerMove.Instance._dir.x == 0 && !DASH.instance.isDashing)
             vel = 0;
 
         anim.SetFloat("x_velocity", vel);
         anim.SetFloat("y_velocity", vel_y);
+    }
+
+    private void UpdateFacingDirection(float horizontalInput)
+    {
+        if (horizontalInput > 0)
+        {
+            spriteRenderer.flipX = false;
+            facingDirection = 1;
+        }
+        else if (horizontalInput < 0)
+        {
+            spriteRenderer.flipX = true;
+            facingDirection = -1;
+        }
     }
 }

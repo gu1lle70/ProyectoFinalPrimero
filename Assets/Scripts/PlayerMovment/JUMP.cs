@@ -47,6 +47,8 @@ public class JUMP : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
                 GameManager.GenerateSound(jump_sound);
+                GameManager.Instance.CreateDust();
+
                 coyoteTimeCounter = 0;
             }
         }
