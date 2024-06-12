@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabCooldown: 0.1
-  lava_sound: {fileID: 8300000, guid: 493078ede99105944b8f4d70a780e771, type: 3}
+  death_sound: {fileID: 8300000, guid: b1c61b3c5a9cae24bbc08e7efd324c14, type: 3}
 --- !u!50 &5186773206195845913
 Rigidbody2D:
   serializedVersion: 4
