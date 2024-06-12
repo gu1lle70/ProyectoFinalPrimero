@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326273177279378549}
   - component: {fileID: 6876597147322476597}
+  - component: {fileID: 8149309944065761472}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,3 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggle: {fileID: 0}
   dust: {fileID: 0}
+  sfxMixer: {fileID: 8001741761775717000, guid: bb42e82ec96d6664b848659714022365, type: 2}
+--- !u!114 &8149309944065761472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147603056598452381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8be61407c01c44fa1a122f8bdeae1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  myMixer: {fileID: 24100000, guid: bb42e82ec96d6664b848659714022365, type: 2}

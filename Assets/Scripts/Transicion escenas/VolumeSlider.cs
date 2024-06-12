@@ -1,37 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
 
-    [SerializeField] Slider volumeSlider;
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
+    [SerializeField] private AudioMixer myMixer;
+    [SerializeField] private AudioReverbZone reverbZone;
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey("musicVolume"))
         {
-            PlayerPrefs.SetFloat("musicVolume", 1);
-            Load();
+            LoadVolume();
         }
         else
         {
-            Load();
+            ChangeMusic();
+            ChangeSFX();
         }
     }
-    public void ChangeVolume()
+    public void ChangeMusic()
     {
-        AudioListener.volume = volumeSlider.value;  
-        Save();
+        float volume = musicSlider.value;  
+        myMixer.SetFloat("music",Mathf.Log10(volume)*20);
+        PlayerPrefs.SetFloat("musicVolume", volume);
+        CheckAndDisableReverb();
     }
-    private void Load()
+    public void ChangeSFX()
     {
-        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        float volume = sfxSlider.value;
+        myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("sfxVolume", volume);
+        CheckAndDisableReverb();
     }
-    private void Save()
+    private void LoadVolume()
     {
-        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+
+        ChangeMusic();
+        ChangeSFX();
     }
-    
+    private void CheckAndDisableReverb()
+    {
+        const float threshold = 0.001f;
+
+        if (musicSlider.value < threshold && sfxSlider.value < threshold)
+        {
+            reverbZone.enabled = false;
+        }
+        else
+        {
+            reverbZone.enabled = true;
+        }
+    }
+
 }

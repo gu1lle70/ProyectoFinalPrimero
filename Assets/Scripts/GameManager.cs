@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public Toggle toggle;
     public ParticleSystem dust;
+    public AudioMixerGroup sfxMixer;
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -73,11 +75,12 @@ public class GameManager : MonoBehaviour
     {
             dust.Play();
     }
-    public static void GenerateSound(AudioClip clip)
+    public void GenerateSound(AudioClip clip)
     {
         GameObject ob = new GameObject("Throwable sound");
         AudioSource a = ob.AddComponent<AudioSource>();
         a.clip = clip;
+        a.outputAudioMixerGroup = sfxMixer;
         a.Play();
 
         Destroy(ob, clip.length);

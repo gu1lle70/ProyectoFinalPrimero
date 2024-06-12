@@ -13,6 +13,7 @@ public class TriggerFinish : MonoBehaviour
     [SerializeField] GameObject clickToContinue;
     [SerializeField] GameObject dialogueMark;
     [SerializeField] GameObject black_bg;
+    [SerializeField] BoxCollider2D box2D;
 
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField, TextArea(4, 6)] private string[] dialogueLines;
@@ -33,6 +34,8 @@ public class TriggerFinish : MonoBehaviour
             if (!didDialogeStart)
             {
                 StartDialogue();
+                PlayerMove.Instance._speed = 0;
+                
             }
             else if (dialogueText.text == dialogueLines[lineIndex])
             {
@@ -60,6 +63,7 @@ public class TriggerFinish : MonoBehaviour
     {
         if (collision.tag == "Player")
             dialogueMark.SetActive(false);
+            finishTutorial = false;
     }
 
 
@@ -77,6 +81,7 @@ public class TriggerFinish : MonoBehaviour
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -280, 1.2f);
         LeanTween.moveX(character.GetComponent<RectTransform>(), 510, 1f).setEase(LeanTweenType.easeInOutBack);
         PlayerMove.Instance.isNotInTutorial = true;
+        box2D.enabled = false;
         dialogueMark.SetActive(true);
         StopAllCoroutines();
         LeanTween.alpha(black_bg.GetComponent<RectTransform>(), 2f, 1f).setOnComplete(ChangeScene);

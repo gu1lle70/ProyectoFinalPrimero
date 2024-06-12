@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
 
     [Header("Stats")]
-    [SerializeField] private float _speed = 10;
+    [SerializeField] public float _speed = 10;
     [SerializeField] private float _slow_multiplier; // Este se usa --- !! ---
     [SerializeField] private LayerMask ground_layer; // Este se usa --- !! ---
     [Space]

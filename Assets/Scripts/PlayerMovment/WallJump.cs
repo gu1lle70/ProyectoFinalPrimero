@@ -98,7 +98,7 @@ public class WallJump : MonoBehaviour
         sliding = false;
         onWallJump = true;
 
-        GameManager.GenerateSound(jump_clip);
+        GameManager.Instance.GenerateSound(jump_clip);
         audioSource.Stop();
         yield return new WaitForSeconds(0.25f);
         onWallJump = false;

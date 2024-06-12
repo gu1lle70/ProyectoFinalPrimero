@@ -73,7 +73,7 @@ private IEnumerator Dash()
 
         Vector2 dir = PlayerMove.Instance._dir;
 
-        GameManager.GenerateSound(dash_sound);
+        GameManager.Instance.GenerateSound(dash_sound);
         ghostController.enabled = true;
 
         dash_num--;
