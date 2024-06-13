@@ -13,6 +13,7 @@ TagManager:
   - MovingPlatform
   - bg_down
   - bg_top
+  - Lava
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Lava
   - Ground
   - Wall
   - Background

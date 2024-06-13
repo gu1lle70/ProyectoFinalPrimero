@@ -13,14 +13,8 @@ public class PlayerCollisions : MonoBehaviour
     // Tiene que haber un collider en trigger para que funcione
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag == "Spikes")
-        {
-            Debug.Log("Death");
-            GameManager.Instance.GenerateSound(death_sound);
-            CheckPoints.Checkpoint_manager.ReturnToCheckpoint();
 
-        }
-        else if (coll.tag == "Dash orb" && !itemGrabbed)
+        if (coll.tag == "Dash orb" && !itemGrabbed)
         {
             DASH.instance.dash_num++;
             DASH.instance.canDash = true;
@@ -54,4 +48,5 @@ public class PlayerCollisions : MonoBehaviour
         yield return new WaitForSeconds(grabCooldown);
         itemGrabbed = false;
     }
+
 }
