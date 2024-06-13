@@ -1247,6 +1247,7 @@ MonoBehaviour:
   musicSlider: {fileID: 605369543}
   sfxSlider: {fileID: 0}
   myMixer: {fileID: 24100000, guid: bb42e82ec96d6664b848659714022365, type: 2}
+  reverbZone: {fileID: 0}
 --- !u!1 &611445533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,7 +3056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 878840409}
-  dust: {fileID: 0}
+  sfxMixer: {fileID: 0}
 --- !u!4 &1657380842
 Transform:
   m_ObjectHideFlags: 0

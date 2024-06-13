@@ -120,7 +120,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   _groundPos: {fileID: 372147978485299768}
-  _radius: 0.12
+  _radius: 0.4
 --- !u!114 &5282859119827872801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   fallMultiplier: 3.5
   lowJumpMultiplier: 2
   dust: {fileID: 7496794659641666136}
-  coyoteTime: 0.1
+  coyoteTime: 0.05
 --- !u!114 &8800880002847733116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00016354024, y: -0.03017788}
+  m_Offset: {x: 0.0045541655, y: -0.030177876}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -499,7 +499,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16031873, y: 0.29047906}
+  m_Size: {x: 0.09765625, y: 0.29047906}
   m_EdgeRadius: 0
 --- !u!95 &6495303741121787173
 Animator:

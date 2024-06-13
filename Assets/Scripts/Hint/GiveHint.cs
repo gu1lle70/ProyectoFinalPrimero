@@ -5,9 +5,15 @@ using UnityEngine;
 public class GiveHint : MonoBehaviour
 {
     [SerializeField] GameObject hintPrefab;
-
+    private void Start()
+    {
+        DASH.instance.enabled = false;
+        DASH.instance.canDash = false;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        DASH.instance.enabled = true;
+        DASH.instance.canDash = true;
         Time.timeScale = 0.1f;
         hintPrefab.SetActive(true);
     }
