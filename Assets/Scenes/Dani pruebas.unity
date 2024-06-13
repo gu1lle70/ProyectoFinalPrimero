@@ -4519,6 +4519,10 @@ PrefabInstance:
       propertyPath: m_LightType
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8800880002847733116, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
+      propertyPath: slide_speed
+      value: -0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4295586221172303243, guid: 705270920918cc84ba17b7e32ad11a8b, type: 3}
     m_RemovedGameObjects: []
@@ -5879,6 +5883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 0}
+  sfxMixer: {fileID: 0}
 --- !u!1 &909712082
 GameObject:
   m_ObjectHideFlags: 0
@@ -6440,7 +6445,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   black_bg: {fileID: 1221609670}
   SceneName: PolPruebas
-  NullObject: {fileID: 472084856}
 --- !u!114 &1221609673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11930,6 +11934,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 544785674}
+    - target: {fileID: 3095099170216956490, guid: f4034c690243bbf4a92cbf43f5048bbc, type: 3}
+      propertyPath: cameraPos
+      value: 
+      objectReference: {fileID: 504970756}
     - target: {fileID: 3095099170216956490, guid: f4034c690243bbf4a92cbf43f5048bbc, type: 3}
       propertyPath: dashOrbs_holder
       value: 
