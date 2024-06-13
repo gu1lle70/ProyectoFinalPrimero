@@ -10,7 +10,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class GameManager : MonoBehaviour
 {
     public Toggle toggle;
-    public ParticleSystem dust;
+    
     public AudioMixerGroup sfxMixer;
     public static GameManager Instance { get; private set; }
 
@@ -71,10 +71,7 @@ public class GameManager : MonoBehaviour
             Screen.fullScreen = !toggle.isOn;
         };
     }
-    public void CreateDust()
-    {
-            dust.Play();
-    }
+    
     public void GenerateSound(AudioClip clip)
     {
         GameObject ob = new GameObject("Throwable sound");

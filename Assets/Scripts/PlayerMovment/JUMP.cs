@@ -5,24 +5,34 @@ using UnityEngine.InputSystem;
 
 public class JUMP : MonoBehaviour
 {
-
     [Header("Jump sound")]
     [SerializeField] private AudioClip jump_sound;
+
     [Header("Jump stats")]
     [SerializeField] private float _jumpForce = 16f;
 
+    [Header("Gravity stats")]
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 2f;
+
+    [Header("Jump dust")]
+    public ParticleSystem dust;
+
     [Header("Coyote time")]
     [SerializeField] private float coyoteTime = 0.2f;
-    [SerializeField] private float coyoteTimeCounter;
-    Rigidbody2D rb;
+    private float coyoteTimeCounter;
 
-    PlayerInput _input;
+    private Rigidbody2D rb;
+    private PlayerInput _input;
+    private bool isJumping;
+
     private void Start()
     {
         _input = new PlayerInput();
         _input.Player.Enable();
-        
+
         _input.Player.Jump.performed += Jump_performed;
+        _input.Player.Jump.canceled += Jump_canceled;
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -37,6 +47,20 @@ public class JUMP : MonoBehaviour
         {
             coyoteTimeCounter = 0;
         }
+
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !isJumping)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
+
+    public void CreateDust()
+    {
+        dust.Play();
     }
 
     private void Jump_performed(InputAction.CallbackContext context)
@@ -45,13 +69,26 @@ public class JUMP : MonoBehaviour
         {
             if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
             {
+                isJumping = true;
                 rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
                 GameManager.Instance.GenerateSound(jump_sound);
-                GameManager.Instance.CreateDust();
-
+                CreateDust();
                 coyoteTimeCounter = 0;
             }
         }
     }
 
+    private void Jump_canceled(InputAction.CallbackContext context)
+    {
+        isJumping = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isJumping)
+        {
+            // Reset isJumping after applying jump force to prevent continuous jumping
+            isJumping = false;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 public class CheckPoints : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class CheckPoints : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private Transform player;
+    [Header("Player")]
+    [SerializeField] public Transform cameraPos;
 
     [Header("Dash orbs parent")]
     [SerializeField] private GameObject dashOrbs_holder;
@@ -24,7 +27,9 @@ public class CheckPoints : MonoBehaviour
 
     public void ReturnToCheckpoint()
     {
+        cameraPos.position = new Vector3(currentCheckpoint.position.x, currentCheckpoint.position.y, cameraPos.position.z);
         player.position = currentCheckpoint.position;
+        
         for (int i = 0; i < dashOrbs_holder.transform.childCount; i++)
             dashOrbs_holder.transform.GetChild(i).gameObject.SetActive(true);
     }

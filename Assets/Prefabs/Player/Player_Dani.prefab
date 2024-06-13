@@ -149,10 +149,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5186773206195845913}
   _speed: 7
-  _slow_multiplier: 0.8
+  _slow_multiplier: 0.5
   ground_layer:
     serializedVersion: 2
     m_Bits: 3072
+  _acceleration: 50
+  _deceleration: 60
+  _maxSpeed: 12
   _horizontal: 0
   _vertical: 0
   _dir: {x: 0, y: 0}
@@ -211,9 +214,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump_sound: {fileID: 8300000, guid: 97529daaa9dc8074e93639f7e8bd7b75, type: 3}
-  _jumpForce: 7
+  _jumpForce: 11
+  fallMultiplier: 3.5
+  lowJumpMultiplier: 2
+  dust: {fileID: 7496794659641666136}
   coyoteTime: 0.1
-  coyoteTimeCounter: 0
 --- !u!114 &8800880002847733116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +445,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1.2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d84fe443c76344e47bf2608968209080, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1005,7 +1010,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.54509807}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
