@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,38 +13,40 @@ public class DASH : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public GhostController ghostController;
 
-
     public bool canDash = true;
     public bool onCooldown = false;
     public bool isDashing;
-    [SerializeField]private float dashingPower = 24f;
-    [SerializeField]private float dashingTime = 0.2f;
-    [SerializeField]private float dashingCooldown = 1f;
+    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashingCooldown = 1f;
 
     public int dash_num = 1;
-
 
     private void Start()
     {
         ghostController.enabled = false;
     }
+
     private void Awake()
     {
-        if (instance == null)   
+        if (instance == null)
             instance = this;
         else
             Destroy(this);
-      
     }
+
     private void Update()
     {
         if (isDashing)
         {
             rb.gravityScale = 0f;
-            return; 
+            return;
         }
         else
+        {
             rb.gravityScale = 1.2f;
+        }
+
         if (PhysicsManager.Instance.IsGrounded || WallJump.instance.sliding)
         {
             canDash = true;
@@ -55,23 +55,24 @@ public class DASH : MonoBehaviour
                 dash_num = 1;
                 FollowScript.instance.currentOrbs = dash_num;
             }
+            onCooldown = false; // Reiniciar el cooldown cuando esté en el suelo
         }
-
     }
+
     public void Dash(InputAction.CallbackContext context)
     {
         if (context.performed && !onCooldown && canDash)
         {
-            StartCoroutine(Dash());
+            StartCoroutine(DashCoroutine());
         }
-
     }
-private IEnumerator Dash()
+
+    private IEnumerator DashCoroutine()
     {
         if (dash_num <= 1)
             onCooldown = true;
 
-        Vector2 dir = PlayerMove.Instance._dir;
+        Vector2 dir = GetDashDirection();
 
         GameManager.Instance.GenerateSound(dash_sound);
         ghostController.enabled = true;
@@ -83,40 +84,32 @@ private IEnumerator Dash()
             canDash = false;
 
         isDashing = true;
-        if (dir.x != 0)
-        {
-            rb.velocity = new Vector2(dir.x * dashingPower, dir.y * dashingPower);
-        }
-        else
-        {
-            if (!PhysicsManager.Instance.IsGrounded && dir.y == -1)
-                rb.velocity = new Vector2(0, dir.y * dashingPower);
-            else
-                rb.velocity = new Vector2(dashingPower * PlayerSprites.Instance.facingDirection, dir.y * dashingPower);
-        }
-        /*
-        if (PlayerSprites.Instance.spriteRenderer.flipX == false)
-        {
-            //rb.velocity = new Vector2(transform.localScale.x * dashingPower, PlayerMove.Instance._dir.y * dashingPower);
-            rb.AddForce(PlayerMove.Instance._dir *  dashingPower, ForceMode2D.Impulse);
-        }
-        else
-        {
-            //rb.velocity = new Vector2(transform.localScale.y * -dashingPower, PlayerMove.Instance._dir.y * -dashingPower);
-            rb.AddForce(PlayerMove.Instance._dir * -dashingPower, ForceMode2D.Impulse);
-        }*/
-
-
-
+        rb.velocity = dir * dashingPower;
 
         yield return new WaitForSeconds(dashingTime);
-       
-        isDashing = false;
 
+        isDashing = false;
         rb.velocity = Vector2.zero;
         ghostController.enabled = false;
 
-        yield return new WaitForSeconds(dashingCooldown - dashingTime);
+        if (!PhysicsManager.Instance.IsGrounded) // Solo mantener el cooldown si no está en el suelo
+        {
+            yield return new WaitForSeconds(dashingCooldown - dashingTime);
+        }
         onCooldown = false;
+    }
+
+    private Vector2 GetDashDirection()
+    {
+        Vector2 dir = Vector2.zero;
+
+        if (Keyboard.current.wKey.isPressed) dir.y += 1;
+        if (Keyboard.current.sKey.isPressed) dir.y -= 1;
+        if (Keyboard.current.dKey.isPressed) dir.x += 1;
+        if (Keyboard.current.aKey.isPressed) dir.x -= 1;
+
+        if (dir == Vector2.zero) dir.x = PlayerSprites.Instance.facingDirection;
+
+        return dir.normalized;
     }
 }

@@ -3,7 +3,11 @@ guid: ffca1067bb40a5f489f04c8139cf7c53
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dash_sound: {fileID: 8300000, guid: 8b71db4e9528a5746b0b7debdd678aee, type: 3}
+  - rb: {instanceID: 0}
+  - spriteRenderer: {instanceID: 0}
+  - ghostController: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
