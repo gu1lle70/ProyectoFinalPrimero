@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class WallJump : MonoBehaviour
 {
@@ -51,80 +50,47 @@ public class WallJump : MonoBehaviour
         {
             sliding = false;
             onWallJump = false;
+            rb.gravityScale = gravityScale;
             return;
         }
 
         right_hit = Physics2D.Raycast(transform.position, transform.right, range, wall_mask);
         left_hit = Physics2D.Raycast(transform.position, -transform.right, range, wall_mask);
 
-        if (!right_hit || !left_hit)
-            sliding = false;
+        sliding = right_hit || left_hit;
 
-        if (right_hit || left_hit && PlayerMove.Instance._dir.y >= 0 && !onWallJump)
+        if (sliding && !onWallJump)
         {
-            rb.velocity = new Vector2(0, slide_speed * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, -slide_speed);
             rb.gravityScale = 0.2f;
-            sliding = true;
+            if (!audioSource.isPlaying && rb.velocity.y < -0.15f)
+            {
+                audioSource.clip = slide_clip;
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            rb.gravityScale = gravityScale;
+            audioSource.Stop();
         }
 
         if (right_hit)
         {
-            if (right_hit.distance > 0.41f)
-                rb.velocity = new Vector2(PlayerMove.Instance._dir.x * -slide_speed * 2, rb.velocity.y);
-            Debug.Log(right_hit.distance);
-
             PlayerSprites.Instance.spriteRenderer.flipX = false;
         }
-        if (left_hit)
+        else if (left_hit)
         {
-            if (left_hit.distance > 0.41f)
-                rb.velocity = new Vector2(PlayerMove.Instance._dir.x * -slide_speed * 2, rb.velocity.y);
-            Debug.Log(left_hit.distance);
             PlayerSprites.Instance.spriteRenderer.flipX = true;
         }
-
-        /*
-        if (!right_hit || !left_hit)
-        {
-            sliding = false;
-            return;
-        }
-        
-        if ((right_hit || left_hit) && rb.velocity.y <= 0 && PlayerMove.Instance._dir.y >= 0)
-        {
-            if (right_hit)
-                PlayerSprites.Instance.spriteRenderer.flipX = false;
-            else
-                PlayerSprites.Instance.spriteRenderer.flipX = true;
-
-            rb.velocity = new Vector2(0, slide_speed);
-            sliding = true;
-
-        }
-        else if (sliding)
-            sliding = false;
-        */
-        if (!audioSource.isPlaying && (right_hit || left_hit) && rb.velocity.y < -0.15f)
-        {
-            audioSource.clip = slide_clip;
-            audioSource.Play();
-        }
     }
+
     public void Wall_Jump(InputAction.CallbackContext con)
     {
-        if (right_hit)
+        if (right_hit || left_hit)
         {
-            Debug.Log("Wall contact");
-
-            rb.velocity = new Vector2(-jump_force, jump_force);
-
-            StartCoroutine(WallDelay());
-        }
-        if (left_hit)
-        {
-            Debug.Log("Wall contact");
-
-            rb.velocity = new Vector2(jump_force, jump_force);
+            Vector2 jumpDirection = new Vector2(left_hit ? jump_force : -jump_force, jump_force);
+            rb.velocity = jumpDirection;
 
             StartCoroutine(WallDelay());
         }
@@ -144,6 +110,8 @@ public class WallJump : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * range);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.left * range);
     }
 }

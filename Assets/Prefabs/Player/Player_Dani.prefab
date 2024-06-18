@@ -119,10 +119,9 @@ MonoBehaviour:
   IsGrounded: 1
   groundedLayer:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1024
   _groundPos: {fileID: 372147978485299768}
   _radius: 0.4
-  _radius: 0.3
 --- !u!114 &5282859119827872801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +153,7 @@ MonoBehaviour:
   _slow_multiplier: 0.5
   ground_layer:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1024
   _acceleration: 50
   _deceleration: 60
   _maxSpeed: 12
@@ -231,14 +230,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2086632009008903650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c7b9944086256947b5a4abaa6ff7952, type: 3}
+  m_Script: {fileID: 11500000, guid: 223d643fd9bfb654ea9ff10c04bde838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onWallJump: 0
   sliding: 0
-  range: 0.52
-  jump_force: 7
-  slide_speed: -0.5
+  range: 0.5
+  jump_force: 10
+  slide_speed: 0.5
   wall_mask:
     serializedVersion: 2
     m_Bits: 2048
@@ -906,7 +905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7160891196164825374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1674, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
