@@ -40,6 +40,9 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (WallJump.instance.sliding)
+            return;
+
         RaycastHit2D ray_to_ground = Physics2D.Raycast(transform.position, Vector2.down, ground_layer);
         if (ray_to_ground && Vector2.Distance(transform.position, ray_to_ground.transform.position) > 100 && rb.velocity.y > 0)
         {
