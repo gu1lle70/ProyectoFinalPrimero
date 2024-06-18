@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7348672295892274488}
   - component: {fileID: 1434121730151122338}
-  - component: {fileID: 6942794269387505506}
   - component: {fileID: 4483378094417548755}
   - component: {fileID: 9211434498076821785}
   m_Layer: 0
@@ -86,14 +85,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6942794269387505506
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5943918798923247990}
-  m_Enabled: 1
 --- !u!114 &4483378094417548755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6dfb404d38ac440bfccd084142c87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraMode: 0
   player: {fileID: 0}
   offset: 2
   offsetSmoothing: 3
   der: 0
   izq: 0
+  moveToNextPosition: 0
+  cameraPosition: {fileID: 0}
