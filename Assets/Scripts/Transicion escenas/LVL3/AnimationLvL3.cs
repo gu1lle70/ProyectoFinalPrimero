@@ -1,9 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AnimationLvL3 : MonoBehaviour
 {
+    [Header("Animation dialogue")]
+    [SerializeField] GameObject bg_top;
+    [SerializeField] GameObject bg_down;
+    [SerializeField] GameObject character;
+    [SerializeField] GameObject clickToContinue;
+    [SerializeField] BoxCollider2D box2D;
+
+    [Space]
+
+    [SerializeField] private TMP_Text dialogueText;
+    [SerializeField, TextArea(4, 6)] private string[] dialogueLines;
+    [SerializeField] private float typingTime = 0.05f;
+
+    [Header("Camera Shake")]
     [SerializeField] private float _duration;
     [SerializeField] private GameObject _camera;
     [SerializeField] private AnimationCurve _curve;
@@ -11,6 +26,31 @@ public class AnimationLvL3 : MonoBehaviour
     [SerializeField] private GameObject _collider;
     [SerializeField] private GameObject _collider2;
     [SerializeField] private GameObject _player;
+
+
+    private int lineIndex;
+
+    public bool startAnimation = false;
+    private bool animationEnded = false;
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+            if (!animationEnded) return;
+            
+            if (dialogueText.text == dialogueLines[lineIndex])
+            {
+                NextDialogueLine();
+            }
+            else
+            {
+                StopAllCoroutines();
+                dialogueText.text = dialogueLines[lineIndex];
+            }
+        }
+    }
 
     IEnumerator Shaking()
     {
@@ -40,8 +80,70 @@ public class AnimationLvL3 : MonoBehaviour
         DASH.instance.enabled = false;
         DASH.instance.canDash = false;
         _player.GetComponent<Rigidbody2D>().gravityScale = 1.2f;
-        _collider2.SetActive(true);
+        _collider2.SetActive(true);        
+        if (collision.tag == "Player")
+        {
+            Debug.Log("empieza dialogo con mago");
+            StartAnimation();
+            startAnimation = true;
+        }
+    }
+
+    private void StartAnimation()
+    {
+        PlayerMove.Instance.isNotInTutorial = false;
+        LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 180, 1f).setEase(LeanTweenType.easeOutCubic);
+        LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -180, 1f).setEase(LeanTweenType.easeOutCubic);
+        LeanTween.moveX(character.GetComponent<RectTransform>(), 330, 1f).setEase(LeanTweenType.easeInOutBack)
+            .setOnComplete(() =>
+            {
+                animationEnded = true;
+                StartDialogue();
+            });
+    }
+
+    private void EndAnimation()
+    {
+        LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 280, 1.2f);
+        LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -280, 1.2f);
+        LeanTween.moveX(character.GetComponent<RectTransform>(), 510, 1f).setEase(LeanTweenType.easeInOutBack);
+        PlayerMove.Instance.isNotInTutorial = true;
+        box2D.enabled = false;
         StartCoroutine(Shaking());
         
     }
+
+    private void StartDialogue()
+    {
+        lineIndex = 0;
+        StartCoroutine(ShowLine());
+    }
+
+    public void NextDialogueLine()
+    {
+        lineIndex++;
+        if (lineIndex < dialogueLines.Length)
+        {
+            StartCoroutine(ShowLine());
+        }
+        else
+        {
+            EndAnimation();
+        }
+    }
+
+    private IEnumerator ShowLine()
+    {
+        clickToContinue.SetActive(false);
+        dialogueText.text = string.Empty;
+        yield return new WaitForSecondsRealtime(0.2f);
+        foreach (char ch in dialogueLines[lineIndex])
+        {
+            dialogueText.text += ch;
+            yield return new WaitForSecondsRealtime(typingTime);
+        }
+        clickToContinue.SetActive(true);
+
+    }
+
 }
