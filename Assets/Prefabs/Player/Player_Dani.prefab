@@ -157,7 +157,6 @@ MonoBehaviour:
   _deceleration: 60
   _maxSpeed: 12
   _horizontal: 0
-  _vertical: 0
   _dir: {x: 0, y: 0}
   isNotInTutorial: 1
 --- !u!114 &1891437792094790108
@@ -167,7 +166,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086632009008903650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffca1067bb40a5f489f04c8139cf7c53, type: 3}
   m_Name: 
@@ -214,11 +213,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump_sound: {fileID: 8300000, guid: 97529daaa9dc8074e93639f7e8bd7b75, type: 3}
-  _jumpForce: 11
-  fallMultiplier: 3.5
-  lowJumpMultiplier: 2
+  jumpForce: 5.5
+  maxJumpTime: 0.125
+  fallMultiplier: 3
+  lowJumpMultiplier: 4
   dust: {fileID: 7496794659641666136}
   coyoteTime: 0.05
+  wallJumpForce: 2
+  wallJumpDirection: {x: 1, y: 1}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8800880002847733116
 MonoBehaviour:
   m_ObjectHideFlags: 0
