@@ -79,10 +79,6 @@ public class DASH : MonoBehaviour
         GameManager.Instance.GenerateSound(dash_sound);
         ghostController.enabled = true;
 
-        FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
-
-
-
         dash_num--;
         FollowScript.instance.currentOrbs = dash_num;
 
