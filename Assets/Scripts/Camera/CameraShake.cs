@@ -7,6 +7,8 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private float _duration;
     [SerializeField] private GameObject _camera;
     [SerializeField] private AnimationCurve _curve;
+    [SerializeField] private List<GameObject> _plataforms;
+    [SerializeField] private GameObject _collider;
 
     IEnumerator Shaking()
     {
@@ -21,12 +23,22 @@ public class CameraShake : MonoBehaviour
             yield return null;
         }
         _camera.transform.position = startPosition;
+        foreach (GameObject go in _plataforms)
+        {
+            go.AddComponent<Rigidbody2D>();
+            yield return new WaitForSeconds(0.07f);
+        }
+        _collider.SetActive(false);
         PlayerMove.Instance.isNotInTutorial = true;
+        PlayerMove.Instance._speed = 7;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerMove.Instance.isNotInTutorial = false;
+        PlayerMove.Instance._speed = 0;
+
         StartCoroutine(Shaking());
         
     }
