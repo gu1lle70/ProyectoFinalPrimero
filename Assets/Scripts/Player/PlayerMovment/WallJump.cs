@@ -59,9 +59,10 @@ public class WallJump : MonoBehaviour
 
         sliding = right_hit || left_hit;
 
+
         if (sliding && !onWallJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -slide_speed);
+            rb.velocity = new Vector2(rb.velocity.x + (PlayerMove.Instance._dir.x * slide_speed), -slide_speed);
             rb.gravityScale = 0.2f;
             if (!audioSource.isPlaying && rb.velocity.y < -0.15f)
             {
@@ -77,10 +78,14 @@ public class WallJump : MonoBehaviour
 
         if (right_hit)
         {
+            if (right_hit.distance < 0.25f)
+                transform.Translate(Vector2.left * 0.1f);
             PlayerSprites.Instance.spriteRenderer.flipX = false;
         }
         else if (left_hit)
         {
+            if (left_hit.distance < 0.25f)
+                transform.Translate(Vector2.right * 0.1f);
             PlayerSprites.Instance.spriteRenderer.flipX = true;
         }
     }
@@ -89,7 +94,7 @@ public class WallJump : MonoBehaviour
     {
         if (right_hit || left_hit)
         {
-            Vector2 jumpDirection = new Vector2(left_hit ? jump_force : -jump_force, jump_force);
+            Vector2 jumpDirection = new Vector2(left_hit ? jump_force * 0.7f : -jump_force * 0.7f, jump_force);
             rb.velocity = jumpDirection;
 
             StartCoroutine(WallDelay());
@@ -101,10 +106,10 @@ public class WallJump : MonoBehaviour
         sliding = false;
         onWallJump = true;
         rb.gravityScale = gravityScale;
-
         GameManager.Instance.GenerateSound(jump_clip);
         audioSource.Stop();
         yield return new WaitForSeconds(0.25f);
+
         onWallJump = false;
     }
 
