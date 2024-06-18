@@ -121,11 +121,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   _groundPos: {fileID: 372147978485299768}
-<<<<<<< HEAD
   _radius: 0.4
-=======
   _radius: 0.3
->>>>>>> origin/main
 --- !u!114 &5282859119827872801
 MonoBehaviour:
   m_ObjectHideFlags: 0
