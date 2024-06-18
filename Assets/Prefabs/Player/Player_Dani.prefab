@@ -122,7 +122,6 @@ MonoBehaviour:
     m_Bits: 3072
   _groundPos: {fileID: 372147978485299768}
   _radius: 0.4
-  playerDeathZone: {fileID: 0}
 --- !u!114 &5282859119827872801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump_sound: {fileID: 8300000, guid: 97529daaa9dc8074e93639f7e8bd7b75, type: 3}
-  jumpForce: 5.5
+  jumpForce: 6
   maxJumpTime: 0.125
   fallMultiplier: 3
   lowJumpMultiplier: 4
