@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class JUMP : MonoBehaviour
 {
+    public static JUMP Instance { get; private set; }
     [Header("Jump sound")]
     [SerializeField] private AudioClip jump_sound;
 
@@ -34,7 +35,14 @@ public class JUMP : MonoBehaviour
     private PlayerInput input;
     private bool jumpHeld;
     private float jumpTimeCounter;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
 
     private void Start()
     {

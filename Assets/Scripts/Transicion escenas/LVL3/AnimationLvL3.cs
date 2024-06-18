@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+public class AnimationLvL3 : MonoBehaviour
 {
     [SerializeField] private float _duration;
     [SerializeField] private GameObject _camera;
     [SerializeField] private AnimationCurve _curve;
     [SerializeField] private List<GameObject> _plataforms;
     [SerializeField] private GameObject _collider;
+    [SerializeField] private GameObject _collider2;
+    [SerializeField] private GameObject _player;
 
     IEnumerator Shaking()
     {
@@ -22,23 +24,23 @@ public class CameraShake : MonoBehaviour
             _camera.transform.position = startPosition + Random.insideUnitSphere * fuerza;
             yield return null;
         }
-        _camera.transform.position = startPosition;
         foreach (GameObject go in _plataforms)
         {
             go.AddComponent<Rigidbody2D>();
+            go.GetComponent<Rigidbody2D>().freezeRotation = true;
             yield return new WaitForSeconds(0.07f);
         }
-        _collider.SetActive(false);
-        PlayerMove.Instance.isNotInTutorial = true;
-        PlayerMove.Instance._speed = 7;
-
+        CameraController.Instance.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMove.Instance.isNotInTutorial = false;
+        _collider.SetActive(false);
         PlayerMove.Instance._speed = 0;
-
+        DASH.instance.enabled = false;
+        DASH.instance.canDash = false;
+        _player.GetComponent<Rigidbody2D>().gravityScale = 1.2f;
+        _collider2.SetActive(true);
         StartCoroutine(Shaking());
         
     }

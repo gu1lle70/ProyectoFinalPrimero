@@ -15,9 +15,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private LayerMask ground_layer;
     [Space]
     [Header("Acceleration and Deceleration")]
-    [SerializeField] private float _acceleration = 2f;
-    [SerializeField] private float _deceleration = 3f;
-    [SerializeField] private float _maxSpeed = 10f;
+    [SerializeField] public float _acceleration = 2f;
+    [SerializeField] public float _deceleration = 3f;
+    [SerializeField] public float _maxSpeed = 10f;
     [Space]
     [Header("Inputs")]
     [SerializeField] public float _horizontal = 1f;
