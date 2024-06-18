@@ -14,6 +14,8 @@ public class PhysicsManager : MonoBehaviour
     [SerializeField] private Transform _groundPos;
     [SerializeField] private float _radius = 0.2f;
 
+
+
     private void Awake()
     {
         if (Instance == null)

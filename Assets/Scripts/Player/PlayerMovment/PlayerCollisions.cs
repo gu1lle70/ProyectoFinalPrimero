@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] private float grabCooldown;
-    [SerializeField] private AudioClip death_sound;
+    
     private bool itemGrabbed = false;
 
     // Tiene que haber un collider en trigger para que funcione
