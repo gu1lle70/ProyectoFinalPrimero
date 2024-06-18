@@ -55,7 +55,7 @@ public class DASH : MonoBehaviour
                 dash_num = 1;
                 FollowScript.instance.currentOrbs = dash_num;
             }
-            onCooldown = false; // Reiniciar el cooldown cuando esté en el suelo
+            onCooldown = false; 
         }
     }
 
@@ -92,7 +92,7 @@ public class DASH : MonoBehaviour
         rb.velocity = Vector2.zero;
         ghostController.enabled = false;
 
-        if (!PhysicsManager.Instance.IsGrounded) // Solo mantener el cooldown si no está en el suelo
+        if (!PhysicsManager.Instance.IsGrounded) 
         {
             yield return new WaitForSeconds(dashingCooldown - dashingTime);
         }

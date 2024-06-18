@@ -21,7 +21,6 @@ public class PlayerMove : MonoBehaviour
     [Space]
     [Header("Inputs")]
     [SerializeField] public float _horizontal = 1f;
-    [SerializeField] public float _vertical;
     [SerializeField] public Vector2 _dir;
 
     public bool isNotInTutorial = true;
@@ -56,7 +55,7 @@ public class PlayerMove : MonoBehaviour
                 // Aceleración
                 rb.velocity = new Vector2(Mathf.MoveTowards(rb.velocity.x, targetSpeed, _acceleration * Time.fixedDeltaTime), rb.velocity.y);
             }
-            else
+            else if (_horizontal == 0 && PhysicsManager.Instance.IsGrounded)
             {
                 // Desaceleración
                 rb.velocity = new Vector2(Mathf.MoveTowards(rb.velocity.x, 0, _deceleration * Time.fixedDeltaTime), rb.velocity.y);
@@ -68,7 +67,7 @@ public class PlayerMove : MonoBehaviour
                 rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * _maxSpeed, rb.velocity.y);
             }
 
-            if (rb.velocity.magnitude > 0 && _dir.x == 0 && PhysicsManager.Instance.IsGrounded)
+            if (rb.velocity.magnitude > 0 && _horizontal == 0 && PhysicsManager.Instance.IsGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x * _slow_multiplier, rb.velocity.y);
             }
@@ -79,9 +78,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (isNotInTutorial)
         {
-            _horizontal = context.ReadValue<Vector2>().x;
-            _vertical = context.ReadValue<Vector2>().y;
-            _dir = new Vector2(_horizontal, _vertical);
+            Vector2 input = context.ReadValue<Vector2>();
+            _horizontal = Mathf.RoundToInt(input.x);
+            _dir = new Vector2(_horizontal, 0);
         }
     }
 }

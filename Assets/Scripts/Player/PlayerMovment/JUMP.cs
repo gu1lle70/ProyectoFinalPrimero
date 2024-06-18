@@ -9,7 +9,8 @@ public class JUMP : MonoBehaviour
     [SerializeField] private AudioClip jump_sound;
 
     [Header("Jump stats")]
-    [SerializeField] private float _jumpForce = 16f;
+    [SerializeField] private float jumpForce = 16f;
+    [SerializeField] private float maxJumpTime = 0.5f;
 
     [Header("Gravity stats")]
     [SerializeField] private float fallMultiplier = 2.5f;
@@ -22,15 +23,26 @@ public class JUMP : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
+    [Header("Wall Jump stats")]
+    [SerializeField] private float wallJumpForce = 10f;
+    [SerializeField] private Vector2 wallJumpDirection = new Vector2(1, 1);
+    [SerializeField] private LayerMask wallLayer;
+    private bool isWallSliding;
+    private bool isJumping;
+
     private Rigidbody2D rb;
-    private PlayerInput _input;
+    private PlayerInput input;
+    private bool jumpHeld;
+    private float jumpTimeCounter;
+    
 
     private void Start()
     {
-        _input = new PlayerInput();
-        _input.Player.Enable();
+        input = new PlayerInput();
+        input.Player.Enable();
 
-        _input.Player.Jump.performed += Jump_performed;
+        input.Player.Jump.performed += Jump_performed;
+        input.Player.Jump.canceled += ctx => jumpHeld = false;
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -50,9 +62,31 @@ public class JUMP : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 )
+        else if (rb.velocity.y > 0 && !jumpHeld)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+
+        // Check for wall sliding
+        isWallSliding = IsWallSliding();
+
+        if (isWallSliding && rb.velocity.y < 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -wallJumpForce);
+        }
+
+        // Maintain jump height based on jump hold time
+        if (isJumping)
+        {
+            if (jumpHeld && jumpTimeCounter > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
         }
     }
 
@@ -65,15 +99,28 @@ public class JUMP : MonoBehaviour
     {
         if (PlayerMove.Instance.isNotInTutorial)
         {
-            if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
+            if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime || isWallSliding)
             {
-                rb.velocity = new Vector2(rb.velocity.x, _jumpForce);
+                isJumping = true;
+                jumpHeld = true;
+                jumpTimeCounter = maxJumpTime; // reiniciar el contador de tiempo de salto
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 GameManager.Instance.GenerateSound(jump_sound);
                 CreateDust();
                 coyoteTimeCounter = 0;
+
+                // Wall jump
+                if (isWallSliding)
+                {
+                    rb.velocity = new Vector2(wallJumpDirection.x * wallJumpForce * -Mathf.Sign(transform.localScale.x), wallJumpForce);
+                    isWallSliding = false;
+                }
             }
         }
     }
 
-   
+    private bool IsWallSliding()
+    {
+        return Physics2D.OverlapCircle(transform.position, 0.1f, wallLayer) && !PhysicsManager.Instance.IsGrounded;
+    }
 }
