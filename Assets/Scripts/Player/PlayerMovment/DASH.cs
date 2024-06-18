@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,9 +17,10 @@ public class DASH : MonoBehaviour
     public bool canDash = true;
     public bool onCooldown = false;
     public bool isDashing;
-    [SerializeField] private float dashingPower = 24f;
+    [SerializeField] public float dashingPower = 24f;
     [SerializeField] private float dashingTime = 0.2f;
     [SerializeField] private float dashingCooldown = 1f;
+    public float superDashMultiplier = 2f;
 
     public int dash_num = 1;
 
@@ -55,7 +57,7 @@ public class DASH : MonoBehaviour
                 dash_num = 1;
                 FollowScript.instance.currentOrbs = dash_num;
             }
-            onCooldown = false; 
+            onCooldown = false;
         }
     }
 
@@ -77,6 +79,10 @@ public class DASH : MonoBehaviour
         GameManager.Instance.GenerateSound(dash_sound);
         ghostController.enabled = true;
 
+        FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+
+
+
         dash_num--;
         FollowScript.instance.currentOrbs = dash_num;
 
@@ -92,14 +98,14 @@ public class DASH : MonoBehaviour
         rb.velocity = Vector2.zero;
         ghostController.enabled = false;
 
-        if (!PhysicsManager.Instance.IsGrounded) 
+        if (!PhysicsManager.Instance.IsGrounded)
         {
             yield return new WaitForSeconds(dashingCooldown - dashingTime);
         }
         onCooldown = false;
     }
 
-    private Vector2 GetDashDirection()
+    public Vector2 GetDashDirection()
     {
         Vector2 dir = Vector2.zero;
 

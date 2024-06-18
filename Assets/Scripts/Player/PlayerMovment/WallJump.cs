@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class WallJump : MonoBehaviour
 {
@@ -13,17 +12,15 @@ public class WallJump : MonoBehaviour
 
     private RaycastHit2D right_hit;
     private RaycastHit2D left_hit;
-    [SerializeField] private float range;
-    [SerializeField] private float jump_force;
-    [SerializeField] private float slide_speed;
+    [SerializeField] private float range = 0.5f;
+    [SerializeField] private float jump_force = 10f;
+    [SerializeField] private float slide_speed = -2f;
     [SerializeField] private LayerMask wall_mask;
     [SerializeField] private AudioClip slide_clip;
     [SerializeField] private AudioClip jump_clip;
 
     private PlayerInput pl_input;
-
     private Rigidbody2D rb;
-
     private AudioSource audioSource;
 
     private void Awake()
@@ -46,51 +43,56 @@ public class WallJump : MonoBehaviour
     {
         if (PhysicsManager.Instance.IsGrounded)
             return;
-        
-        right_hit = Physics2D.Raycast(transform.position, transform.right, range, wall_mask);
-        left_hit = Physics2D.Raycast(transform.position, -transform.right, range, wall_mask);
 
-        if (!right_hit || !left_hit)
-            sliding = false;
+        // Detect walls to the left and right
+        right_hit = Physics2D.Raycast(transform.position, Vector2.right, range, wall_mask);
+        left_hit = Physics2D.Raycast(transform.position, Vector2.left, range, wall_mask);
 
-        if ((right_hit || left_hit) && rb.velocity.y <= 0 && PlayerMove.Instance._dir.y >= 0)
+        if (!right_hit && !left_hit)
         {
+            sliding = false;
+        }
+        else if ((right_hit || left_hit) && rb.velocity.y <= 0 && PlayerMove.Instance._dir.y >= 0)
+        {
+            // Determine the direction the player is facing
             if (right_hit)
                 PlayerSprites.Instance.spriteRenderer.flipX = false;
             else
                 PlayerSprites.Instance.spriteRenderer.flipX = true;
 
-            rb.velocity = new Vector2(0, slide_speed);
+            // Apply slide speed
+            rb.velocity = new Vector2(rb.velocity.x, slide_speed);
             sliding = true;
 
-        }
-        else if (sliding)
-            sliding = false;
-
-        if (!audioSource.isPlaying && (right_hit || left_hit) && rb.velocity.y < -0.15f)
-        {
-            audioSource.clip = slide_clip;
-            audioSource.Play();
+            if (!audioSource.isPlaying && rb.velocity.y < -0.15f)
+            {
+                audioSource.clip = slide_clip;
+                audioSource.Play();
+            }
         }
     }
-    public void Wall_Jump(InputAction.CallbackContext con)
+
+    private void Wall_Jump(InputAction.CallbackContext context)
     {
         if (right_hit)
         {
-            Debug.Log("Wall contact");
-
-            rb.velocity = new Vector2(-jump_force * 0.7f, jump_force);
-
-            StartCoroutine(WallDelay());
+            PerformWallJump(-1);
         }
-        if (left_hit)
+        else if (left_hit)
         {
-            Debug.Log("Wall contact");
-
-            rb.velocity = new Vector2(jump_force * 0.7f, jump_force);
-
-            StartCoroutine(WallDelay());
+            PerformWallJump(1);
         }
+    }
+
+    private void PerformWallJump(int direction)
+    {
+        Debug.Log("Wall contact");
+
+        // Apply jump force
+        rb.velocity = new Vector2(direction * jump_force * 0.7f, jump_force);
+        StartCoroutine(WallDelay());
+
+        GameManager.Instance.GenerateSound(jump_clip);
     }
 
     private IEnumerator WallDelay()
@@ -98,7 +100,6 @@ public class WallJump : MonoBehaviour
         sliding = false;
         onWallJump = true;
 
-        GameManager.Instance.GenerateSound(jump_clip);
         audioSource.Stop();
         yield return new WaitForSeconds(0.25f);
         onWallJump = false;

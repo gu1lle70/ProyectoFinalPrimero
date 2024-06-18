@@ -12,6 +12,11 @@ public class JUMP : MonoBehaviour
     [Header("Jump stats")]
     [SerializeField] private float jumpForce = 16f;
     [SerializeField] private float maxJumpTime = 0.5f;
+    private bool isJumping;
+    private Rigidbody2D rb;
+    private PlayerInput input;
+    private bool jumpHeld;
+    private float jumpTimeCounter;
 
     [Header("Gravity stats")]
     [SerializeField] private float fallMultiplier = 2.5f;
@@ -23,18 +28,9 @@ public class JUMP : MonoBehaviour
     [Header("Coyote time")]
     [SerializeField] private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
+    private bool wasGrounded;
 
-    [Header("Wall Jump stats")]
-    [SerializeField] private float wallJumpForce = 10f;
-    [SerializeField] private Vector2 wallJumpDirection = new Vector2(1, 1);
-    [SerializeField] private LayerMask wallLayer;
-    private bool isWallSliding;
-    private bool isJumping;
-
-    private Rigidbody2D rb;
-    private PlayerInput input;
-    private bool jumpHeld;
-    private float jumpTimeCounter;
+    private DASH dashScript;
 
     private void Awake()
     {
@@ -53,6 +49,7 @@ public class JUMP : MonoBehaviour
         input.Player.Jump.canceled += ctx => jumpHeld = false;
 
         rb = GetComponent<Rigidbody2D>();
+        dashScript = DASH.instance;
     }
 
     private void Update()
@@ -75,15 +72,6 @@ public class JUMP : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        // Check for wall sliding
-        isWallSliding = IsWallSliding();
-
-        if (isWallSliding && rb.velocity.y < 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, -wallJumpForce);
-        }
-
-        // Maintain jump height based on jump hold time
         if (isJumping)
         {
             if (jumpHeld && jumpTimeCounter > 0)
@@ -96,6 +84,19 @@ public class JUMP : MonoBehaviour
                 isJumping = false;
             }
         }
+
+        if (isJumping && dashScript.isDashing)
+        {
+            rb.velocity = dashScript.GetDashDirection() * dashScript.dashingPower * dashScript.superDashMultiplier;
+            isJumping = false;
+            dashScript.isDashing = false;
+        }
+
+        if (!wasGrounded && PhysicsManager.Instance.IsGrounded)
+        {
+            CreateDust();
+        }
+        wasGrounded = PhysicsManager.Instance.IsGrounded;
     }
 
     public void CreateDust()
@@ -107,28 +108,16 @@ public class JUMP : MonoBehaviour
     {
         if (PlayerMove.Instance.isNotInTutorial)
         {
-            if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime || isWallSliding)
+            if (PhysicsManager.Instance.IsGrounded || coyoteTimeCounter < coyoteTime)
             {
                 isJumping = true;
                 jumpHeld = true;
-                jumpTimeCounter = maxJumpTime; // reiniciar el contador de tiempo de salto
+                jumpTimeCounter = maxJumpTime;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 GameManager.Instance.GenerateSound(jump_sound);
                 CreateDust();
                 coyoteTimeCounter = 0;
-
-                // Wall jump
-                if (isWallSliding)
-                {
-                    rb.velocity = new Vector2(wallJumpDirection.x * wallJumpForce * -Mathf.Sign(transform.localScale.x), wallJumpForce);
-                    isWallSliding = false;
-                }
             }
         }
-    }
-
-    private bool IsWallSliding()
-    {
-        return Physics2D.OverlapCircle(transform.position, 0.1f, wallLayer) && !PhysicsManager.Instance.IsGrounded;
     }
 }
