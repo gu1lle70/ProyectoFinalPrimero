@@ -107,7 +107,6 @@ public class AnimationLvL3 : MonoBehaviour
         LeanTween.moveY(bg_top.GetComponent<RectTransform>(), 280, 1.2f);
         LeanTween.moveY(bg_down.GetComponent<RectTransform>(), -280, 1.2f);
         LeanTween.moveX(character.GetComponent<RectTransform>(), 510, 1f).setEase(LeanTweenType.easeInOutBack);
-        PlayerMove.Instance.isNotInTutorial = true;
         box2D.enabled = false;
         StartCoroutine(Shaking());
         
