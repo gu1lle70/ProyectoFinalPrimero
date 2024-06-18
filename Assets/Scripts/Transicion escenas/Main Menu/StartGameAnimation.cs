@@ -19,12 +19,12 @@ public class StartGameAnimation : MonoBehaviour
 
     public void OptionsAnimationOpen()
     {
-        LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 14.0f, 1.5f).setEase(LeanTweenType.easeOutBounce);
+        LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 0.0f, 1.5f).setEase(LeanTweenType.easeOutBounce);
     }
 
     public void OptionsAnimationClose()
     {
-        LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 958.0f, 1.5f).setEase(LeanTweenType.easeInBack);
+        LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 1093.0f, 1.5f).setEase(LeanTweenType.easeInBack);
     }
 
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeathCollision : MonoBehaviour
 {
     [Header("DeathZones")]
-    [SerializeField] public BoxCollider2D playerDeathZone;
     [SerializeField] private AudioClip death_sound;
 
 
