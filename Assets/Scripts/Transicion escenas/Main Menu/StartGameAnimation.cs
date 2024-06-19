@@ -10,6 +10,9 @@ public class StartGameAnimation : MonoBehaviour
     public static StartGameAnimation Instance { get; private set; }
 
     [SerializeField] private GameObject _optionsMenu;
+    [SerializeField] private GameObject _creditsMenu;
+    [SerializeField] private GameObject _blockButtons;
+    [SerializeField] private GameObject _blockButtons2;
     [SerializeField] private Image Block_Buttons;
     [SerializeField] private GameObject _BG_Izq;
     [SerializeField] private GameObject _BG_Der;
@@ -22,12 +25,30 @@ public class StartGameAnimation : MonoBehaviour
 
     public void OptionsAnimationOpen()
     {
+        _blockButtons.SetActive(true);
+        _blockButtons2.SetActive(false);
         LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 0.0f, 1.5f).setEase(LeanTweenType.easeOutBounce);
     }
 
     public void OptionsAnimationClose()
     {
+        _blockButtons.SetActive(false);
+        _blockButtons2.SetActive(true);
         LeanTween.moveY(_optionsMenu.GetComponent<RectTransform>(), 1093.0f, 1.5f).setEase(LeanTweenType.easeInBack);
+    }
+
+    public void CreditsAnimationOpen()
+    {
+        _blockButtons.SetActive(true);
+        _blockButtons2.SetActive(false);
+        LeanTween.moveY(_creditsMenu.GetComponent<RectTransform>(), 0.0f, 1.5f).setEase(LeanTweenType.easeOutBounce);
+    }
+
+    public void CreditsAnimationClose()
+    {
+        _blockButtons.SetActive(false);
+        _blockButtons2.SetActive(true);
+        LeanTween.moveY(_creditsMenu.GetComponent<RectTransform>(), -1093f, 1.5f).setEase(LeanTweenType.easeInBack);
     }
 
 
