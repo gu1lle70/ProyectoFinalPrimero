@@ -60,7 +60,7 @@ public class WallJump : MonoBehaviour
 
         sliding = right_hit || left_hit;
 
-        if (sliding && !onWallJump && !LeadgeClimb.Instance.canClimbLeadge)
+        if (sliding && !onWallJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, -slide_speed);
             rb.gravityScale = 0.2f;

@@ -83,13 +83,6 @@ public class JUMP : MonoBehaviour
             }
         }
 
-        if (isJumping && dashScript.isDashing)
-        {
-            rb.velocity = dashScript.GetDashDirection() * dashScript.dashingPower * dashScript.superDashMultiplier;
-            isJumping = false;
-            dashScript.isDashing = false;
-        }
-
         if (!wasGrounded && PhysicsManager.Instance.IsGrounded)
         {
             CreateDust();
