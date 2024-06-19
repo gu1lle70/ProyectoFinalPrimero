@@ -31,6 +31,7 @@ public class AnimationTutorial : MonoBehaviour
     {
         FadeOut();
         hasFinished = false;
+        GameManager.Instance.tutorialHasEnd = false;
     }
 
     private void Update()

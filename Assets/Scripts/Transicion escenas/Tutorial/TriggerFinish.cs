@@ -125,6 +125,7 @@ public class TriggerFinish : MonoBehaviour
 
     private void ChangeScene()
     {
+        GameManager.Instance.tutorialHasEnd = true;
         SceneManager.LoadScene(SceneName);
     }
 

@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -14,12 +15,14 @@ public class GameManager : MonoBehaviour
     public AudioMixerGroup sfxMixer;
     public static GameManager Instance { get; private set; }
 
+
+    public bool tutorialHasEnd;
+
     private void Awake()
     {
         if (Instance != null)
         {
-            Destroy(Instance);
-
+            Object.Destroy(Instance);
         }
         else
         {

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class StartGameAnimation : MonoBehaviour
 {
+    public static StartGameAnimation Instance { get; private set; }
+
     [SerializeField] private GameObject _optionsMenu;
     [SerializeField] private Image Block_Buttons;
     [SerializeField] private GameObject _BG_Izq;
@@ -16,6 +18,7 @@ public class StartGameAnimation : MonoBehaviour
     [SerializeField] private GameObject Text3;
     [SerializeField] private AudioManager audioManager;
     public string sceneName;
+
 
     public void OptionsAnimationOpen()
     {
@@ -49,7 +52,8 @@ public class StartGameAnimation : MonoBehaviour
     }
     private void ChangeScene()
     {
-        audioManager.FadeOutMusic();
-        SceneManager.LoadScene(sceneName);
+        audioManager.FadeOutMusic();  
+        if (!GameManager.Instance.tutorialHasEnd) SceneManager.LoadScene(sceneName);
+        else SceneManager.LoadScene("Nivel1");
     }
 }
