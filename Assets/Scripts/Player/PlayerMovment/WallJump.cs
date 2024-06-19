@@ -20,11 +20,10 @@ public class WallJump : MonoBehaviour
     [SerializeField] private AudioClip jump_clip;
 
     private PlayerInput pl_input;
-
     private Rigidbody2D rb;
     private float gravityScale;
-
     private AudioSource audioSource;
+    private DASH dashScript;
 
     private void Awake()
     {
@@ -42,6 +41,8 @@ public class WallJump : MonoBehaviour
         pl_input.Player.Enable();
 
         pl_input.Player.Jump.performed += Wall_Jump;
+
+        dashScript = DASH.instance;
     }
 
     private void FixedUpdate()
@@ -59,10 +60,9 @@ public class WallJump : MonoBehaviour
 
         sliding = right_hit || left_hit;
 
-
-        if (sliding && !onWallJump)
+        if (sliding && !onWallJump && !LeadgeClimb.Instance.canClimbLeadge)
         {
-            rb.velocity = new Vector2(rb.velocity.x + (PlayerMove.Instance._dir.x * slide_speed), -slide_speed);
+            rb.velocity = new Vector2(rb.velocity.x, -slide_speed);
             rb.gravityScale = 0.2f;
             if (!audioSource.isPlaying && rb.velocity.y < -0.15f)
             {

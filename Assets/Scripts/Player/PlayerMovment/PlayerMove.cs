@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     [Header("Inputs")]
     [SerializeField] public float _horizontal = 1f;
     [SerializeField] public Vector2 _dir;
+    
 
     public bool isNotInTutorial = true;
 

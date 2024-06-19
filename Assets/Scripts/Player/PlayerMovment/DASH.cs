@@ -49,7 +49,7 @@ public class DASH : MonoBehaviour
             rb.gravityScale = 1.2f;
         }
 
-        if (PhysicsManager.Instance.IsGrounded || WallJump.instance.sliding)
+        if (PhysicsManager.Instance.IsGrounded)
         {
             canDash = true;
             if (dash_num <= 0)
