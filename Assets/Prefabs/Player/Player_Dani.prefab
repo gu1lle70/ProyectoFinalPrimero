@@ -49,8 +49,6 @@ Transform:
   - {fileID: 8103890317731100879}
   - {fileID: 372147978485299768}
   - {fileID: 863437811900933916}
-  - {fileID: 2599232644981858459}
-  - {fileID: 2871398581778446844}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,14 +122,6 @@ MonoBehaviour:
     m_Bits: 1024
   _groundPos: {fileID: 372147978485299768}
   _radius: 0.4
-  ledgeCheck: {fileID: 2599232644981858459}
-  wallCheck: {fileID: 2871398581778446844}
-  ledgeDistance: 1
-  ledgePosBot: {x: 0, y: 0}
-  ledgePos1: {x: 0, y: 0}
-  ledgePos2: {x: 0, y: 0}
-  isTouchingLedge: 0
-  isTouchingWall: 0
 --- !u!114 &5282859119827872801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,13 +236,13 @@ MonoBehaviour:
   onWallJump: 0
   sliding: 0
   range: 0.5
-  jump_force: 15
-  slide_speed: 0.5
+  jump_force: 14
+  slide_speed: 2.5
   wall_mask:
     serializedVersion: 2
     m_Bits: 2048
-  slide_clip: {fileID: 8300000, guid: 7c0fba8b21ce14a4aacc1b45642fdd15, type: 3}
-  jump_clip: {fileID: 8300000, guid: 97529daaa9dc8074e93639f7e8bd7b75, type: 3}
+  slide_clip: {fileID: 8300000, guid: 632b8df04dd84fc419ed6a027bd884ce, type: 3}
+  jump_clip: {fileID: 8300000, guid: e8bbf10040e8f8b42b646d7ef84883c3, type: 3}
 --- !u!114 &6235662776289928425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,37 +677,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086632009008903650}
   m_Enabled: 1
---- !u!1 &2650764186154550154
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2871398581778446844}
-  m_Layer: 0
-  m_Name: WallCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2871398581778446844
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2650764186154550154}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0884, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 278099329763708595}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2754956411538872017
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,37 +881,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &6862184755456499815
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2599232644981858459}
-  m_Layer: 0
-  m_Name: LeadgeCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2599232644981858459
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6862184755456499815}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0833, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 278099329763708595}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7160891196164825374
 GameObject:
   m_ObjectHideFlags: 0
